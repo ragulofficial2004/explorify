@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#150b2e"><title>Explorify</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--hero:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232a1260'/%3E%3Cstop offset='0.5' stop-color='%239b4fd8'/%3E%3Cstop offset='0.8' stop-color='%23ff9ccf'/%3E%3Cstop offset='1' stop-color='%23ffd6a8'/%3E%3C/linearGradient%3E%3Crect width='400' height='500' fill='url(%23a)'/%3E%3Ccircle cx='280' cy='320' r='70' fill='%23ffe9c4' opacity='.9'/%3E%3Ccircle cx='280' cy='320' r='120' fill='%23ffb3e0' opacity='.25'/%3E%3Cg opacity='0.6' fill='white'%3E%3Cellipse cx='80' cy='340' rx='72.0' ry='19.2'/%3E%3Cellipse cx='116.0' cy='328.0' rx='48.0' ry='19.2'/%3E%3Cellipse cx='44.0' cy='332.8' rx='40.8' ry='15.6'/%3E%3C/g%3E%3Cg opacity='0.8' fill='white'%3E%3Cellipse cx='300' cy='380' rx='84.0' ry='22.4'/%3E%3Cellipse cx='342.0' cy='366.0' rx='56.0' ry='22.4'/%3E%3Cellipse cx='258.0' cy='371.6' rx='47.599999999999994' ry='18.2'/%3E%3C/g%3E%3Cg opacity='0.9' fill='white'%3E%3Cellipse cx='150' cy='430' rx='108.0' ry='28.8'/%3E%3Cellipse cx='204.0' cy='412.0' rx='72.0' ry='28.8'/%3E%3Cellipse cx='96.0' cy='419.2' rx='61.2' ry='23.400000000000002'/%3E%3C/g%3E%3Cg opacity='0.95' fill='white'%3E%3Cellipse cx='360' cy='460' rx='96.0' ry='25.6'/%3E%3Cellipse cx='408.0' cy='444.0' rx='64.0' ry='25.6'/%3E%3Cellipse cx='312.0' cy='450.4' rx='54.400000000000006' ry='20.8'/%3E%3C/g%3E%3Cpath d='M0 250 L260 300 L330 292 L0 330Z' fill='%23f4effa'/%3E%3Cpath d='M0 330 L250 300 L330 292 L250 320Z' fill='%23c9b8e6'/%3E%3Cpath d='M20 215 L40 215 L70 280 L40 285Z' fill='%23e5368c'/%3E%3C/svg%3E") center/cover no-repeat;--bg:#150b2e;--glass:rgba(255,255,255,.12);--line:rgba(255,255,255,.22);--tx:#fff;--mut:rgba(255,255,255,.62);--gold:#d58bff;--org:#a855f7;--blue:#6d5cff;box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;background:radial-gradient(circle at 50% 0,#e9ddff,#bfa6ee 60%,#8e70cf);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+#app{position:relative;width:100%;max-width:410px;height:100%;max-height:860px;background:var(--bg);overflow:hidden;border-radius:0}
+@media(min-width:500px){#app{border-radius:44px;box-shadow:0 30px 80px rgba(40,20,90,.45);border:6px solid #efe6ff}}
+.bg{position:absolute;inset:0;background:
+radial-gradient(ellipse at 20% 12%,rgba(168,85,247,.55),transparent 45%),
+radial-gradient(ellipse at 85% 55%,rgba(236,72,153,.35),transparent 50%),
+linear-gradient(180deg,#3a1d7a 0%,#5a2a9e 38%,#2a1850 70%,#0f0820 100%)}
+.scr{isolation:isolate;position:absolute;inset:0;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0) 20px 0;}
+#v.enter .scr{animation:in .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.sb{display:flex;justify-content:space-between;font-size:13px;font-weight:700;padding:14px 6px 8px}
+.body{flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:96px}.body::-webkit-scrollbar{display:none}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:24px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);font-size:13px;cursor:pointer;color:var(--tx);white-space:nowrap}
+.pill.on{background:linear-gradient(135deg,var(--blue),var(--gold));border-color:transparent;font-weight:700}
+.ic{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--glass);border:1px solid var(--line);cursor:pointer;font-size:16px;flex:none}
+h1,h2,.card .t{font-family:'Sora','Plus Jakarta Sans',system-ui,sans-serif}h1{font-size:34px;line-height:1.15;font-weight:600;letter-spacing:-1px}h1 span{color:var(--mut)}
+h2{font-size:19px;font-weight:600;letter-spacing:-.3px}h3{font-size:16px;font-weight:600}
+p,.m{font-size:13px;color:var(--mut);line-height:1.5}
+.row{display:flex;align-items:center;gap:10px}.sp{justify-content:space-between}.col{display:flex;flex-direction:column;gap:12px}
+.btn{height:58px;border-radius:99px;display:flex;align-items:center;gap:14px;padding:6px;background:rgba(24,12,50,.62);border:1px solid var(--line);backdrop-filter:blur(14px);cursor:pointer;color:var(--tx);font:600 15px 'Plus Jakarta Sans',system-ui,sans-serif;width:100%}
+.btn b{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--gold));display:grid;place-items:center;font-weight:400}
+.btn span{flex:1;text-align:center;margin-right:46px}
+.in{width:100%;height:54px;border-radius:99px;background:var(--glass);border:1px solid var(--line);padding:0 20px;color:#fff;font:500 15px 'Plus Jakarta Sans',system-ui,sans-serif;outline:none}
+.in::placeholder{color:var(--mut)}
+.card{position:relative;border-radius:28px;overflow:hidden;min-height:250px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;border:1px solid var(--line)}
+.card .t{font-size:22px;font-weight:600;line-height:1.15;letter-spacing:-.5px;text-transform:uppercase}
+.i1{background:var(--ph,none) center/cover no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232a1260'/%3E%3Cstop offset='0.5' stop-color='%239b4fd8'/%3E%3Cstop offset='0.8' stop-color='%23ff9ccf'/%3E%3Cstop offset='1' stop-color='%23ffd6a8'/%3E%3C/linearGradient%3E%3Crect width='400' height='500' fill='url(%23a)'/%3E%3Ccircle cx='280' cy='320' r='70' fill='%23ffe9c4' opacity='.9'/%3E%3Ccircle cx='280' cy='320' r='120' fill='%23ffb3e0' opacity='.25'/%3E%3Cg opacity='0.6' fill='white'%3E%3Cellipse cx='80' cy='340' rx='72.0' ry='19.2'/%3E%3Cellipse cx='116.0' cy='328.0' rx='48.0' ry='19.2'/%3E%3Cellipse cx='44.0' cy='332.8' rx='40.8' ry='15.6'/%3E%3C/g%3E%3Cg opacity='0.8' fill='white'%3E%3Cellipse cx='300' cy='380' rx='84.0' ry='22.4'/%3E%3Cellipse cx='342.0' cy='366.0' rx='56.0' ry='22.4'/%3E%3Cellipse cx='258.0' cy='371.6' rx='47.599999999999994' ry='18.2'/%3E%3C/g%3E%3Cg opacity='0.9' fill='white'%3E%3Cellipse cx='150' cy='430' rx='108.0' ry='28.8'/%3E%3Cellipse cx='204.0' cy='412.0' rx='72.0' ry='28.8'/%3E%3Cellipse cx='96.0' cy='419.2' rx='61.2' ry='23.400000000000002'/%3E%3C/g%3E%3Cg opacity='0.95' fill='white'%3E%3Cellipse cx='360' cy='460' rx='96.0' ry='25.6'/%3E%3Cellipse cx='408.0' cy='444.0' rx='64.0' ry='25.6'/%3E%3Cellipse cx='312.0' cy='450.4' rx='54.400000000000006' ry='20.8'/%3E%3C/g%3E%3Cpath d='M0 250 L260 300 L330 292 L0 330Z' fill='%23f4effa'/%3E%3Cpath d='M0 330 L250 300 L330 292 L250 320Z' fill='%23c9b8e6'/%3E%3Cpath d='M20 215 L40 215 L70 280 L40 285Z' fill='%23e5368c'/%3E%3C/svg%3E") center/cover no-repeat}
+.i2{background:var(--ph,none) center/cover no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%233b1b7a'/%3E%3Cstop offset='0.45' stop-color='%238c5ce0'/%3E%3Cstop offset='0.7' stop-color='%23f4a8d8'/%3E%3C/linearGradient%3E%3ClinearGradient id='w' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%237d5bd0'/%3E%3Cstop offset='1' stop-color='%232a1a5c'/%3E%3C/linearGradient%3E%3Crect width='400' height='500' fill='url(%23a)'/%3E%3Ccircle cx='110' cy='170' r='34' fill='%23fff3d6'/%3E%3Cpath d='M0 330 L90 210 L160 290 L240 180 L330 280 L400 230 L400 360 L0 360Z' fill='%236a3fb0'/%3E%3Cpath d='M0 360 L70 290 L150 340 L230 270 L320 340 L400 300 L400 380 L0 380Z' fill='%23452a85'/%3E%3Crect y='370' width='400' height='130' fill='url(%23w)'/%3E%3Cpath d='M250 372 h60 v-14 h-8 v-16 h-8 v-14 h-28 v14 h-8 v16 h-8z' fill='%231d1240'/%3E%3Cpath d='M250 372 h60 v6 h-60z' fill='%23fff' opacity='.2'/%3E%3Cg stroke='%23fff' stroke-opacity='.25' stroke-width='2'%3E%3Cpath d='M60 420 h90 M200 445 h140 M90 470 h110'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat}
+.i3{background:var(--ph,none) center/cover no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%234a1d8f'/%3E%3Cstop offset='0.55' stop-color='%23c36bd9'/%3E%3Cstop offset='1' stop-color='%23ffc2a8'/%3E%3C/linearGradient%3E%3Crect width='400' height='500' fill='url(%23a)'/%3E%3Ccircle cx='300' cy='200' r='46' fill='%23ffe6c8'/%3E%3Crect y='330' width='400' height='170' fill='%232d3f9c'/%3E%3Cpath d='M0 330 L0 270 L60 250 L120 262 L190 240 L260 270 L330 300 L400 330Z' fill='%23f6efff'/%3E%3Cg fill='%233b52d6'%3E%3Cpath d='M40 250 a16 16 0 0 1 32 0z'/%3E%3Cpath d='M200 240 a14 14 0 0 1 28 0z'/%3E%3C/g%3E%3Cg fill='%23e4d8f7'%3E%3Crect x='80' y='270' width='46' height='60'/%3E%3Crect x='150' y='262' width='54' height='68'/%3E%3Crect x='230' y='285' width='50' height='45'/%3E%3C/g%3E%3Cpath d='M0 330 H400 V345 H0Z' fill='%23fff' opacity='.2'/%3E%3C/svg%3E") center/cover no-repeat}
+.i4{background:var(--ph,none) center/cover no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231c2a8a'/%3E%3Cstop offset='0.55' stop-color='%237a8ff0'/%3E%3Cstop offset='1' stop-color='%23f2cdf0'/%3E%3C/linearGradient%3E%3Crect width='400' height='500' fill='url(%23a)'/%3E%3Ccircle cx='90' cy='120' r='26' fill='%23fffbe8'/%3E%3Cpath d='M0 400 L110 190 L190 320 L270 140 L400 400Z' fill='%23dfe6ff'/%3E%3Cpath d='M110 190 L150 262 L120 250 L100 280 L80 250Z M270 140 L320 240 L290 228 L268 262 L240 228Z' fill='%23fff'/%3E%3Cpath d='M0 400 L80 330 L170 400 L260 320 L400 410 V500 H0Z' fill='%234b3a9e'/%3E%3Cpath d='M0 450 L120 400 L240 440 L400 390 V500 H0Z' fill='%232b1f6b'/%3E%3C/svg%3E") center/cover no-repeat}
+.i5{background:var(--ph,none) center/cover no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232b1a6e'/%3E%3Cstop offset='0.6' stop-color='%23b273e8'/%3E%3Cstop offset='1' stop-color='%23ffc9e6'/%3E%3C/linearGradient%3E%3Crect width='400' height='500' fill='url(%23a)'/%3E%3Ccircle cx='270' cy='150' r='50' fill='%23fff1ef' opacity='.95'/%3E%3Cpath d='M0 360 Q100 280 200 340 T400 320 V500 H0Z' fill='%236a3fb5'/%3E%3Cpath d='M0 420 Q120 360 240 410 T400 400 V500 H0Z' fill='%232f1a66'/%3E%3Cg fill='%231a0f3f'%3E%3Crect x='170' y='280' width='60' height='8'/%3E%3Crect x='178' y='262' width='44' height='8'/%3E%3Crect x='186' y='246' width='28' height='8'/%3E%3Crect x='198' y='230' width='4' height='16'/%3E%3Crect x='182' y='288' width='36' height='60'/%3E%3C/g%3E%3Cg fill='%23ff7fc6' opacity='.85'%3E%3Ccircle cx='70' cy='300' r='6'/%3E%3Ccircle cx='100' cy='320' r='5'/%3E%3Ccircle cx='330' cy='270' r='6'/%3E%3Ccircle cx='350' cy='300' r='5'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat}
+.tab{position:absolute;left:16px;right:16px;bottom:18px;height:68px;border-radius:99px;display:flex;justify-content:space-around;align-items:center;padding:0 8px;z-index:5;background:rgba(24,12,50,.6)}
+.tab div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--mut);padding:8px 12px;border-radius:99px;cursor:pointer}
+.tab div i{font-style:normal;font-size:18px}.tab .on{background:linear-gradient(135deg,var(--blue),var(--gold));color:#fff;font-weight:700}
+.tag{padding:6px 12px;border-radius:99px;background:rgba(0,0,0,.28);border:1px solid var(--line);font-size:12px;backdrop-filter:blur(8px)}
+.dots{display:flex;gap:6px;justify-content:center}.dots i{width:8px;height:8px;border-radius:9px;background:var(--line)}.dots i.on{width:26px;background:var(--gold)}
+.bar{height:8px;border-radius:9px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:9px}
+.sec{margin:18px 0 10px}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.map{height:200px;border-radius:24px;position:relative;overflow:hidden;background:linear-gradient(135deg,#4a2f8f,#7a4fd0);border:1px solid var(--line)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.tl{border-left:2px dashed var(--line);margin-left:8px;padding-left:18px;display:flex;flex-direction:column;gap:12px}
+.li{padding:14px 16px;border-radius:20px}
+.av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--org),var(--gold));display:grid;place-items:center;font-weight:700;flex:none}
+.card::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(15,6,35,.05) 35%,rgba(15,6,35,.8));pointer-events:none}
+.card>*{position:relative;z-index:1}
+.hero{position:absolute;inset:0;z-index:-1;background:var(--ph,none) center/cover no-repeat,var(--hero);opacity:.95;background-position:center bottom!important;-webkit-mask-image:linear-gradient(180deg,transparent 15%,#000 60%);mask-image:linear-gradient(180deg,transparent 15%,#000 60%)}
+.body{padding-top:4px}.col{gap:14px}.sec{margin:22px 0 12px}.sec.row,.row.sp{align-items:center}
+.glass.li{align-items:center}.li p{margin:0}.in{margin:0}.pill{line-height:1}
+.tab div{min-width:58px;justify-content:center}.btn span{line-height:1}
+
+/* ---- motion ---- */
+:root{--ease:cubic-bezier(.2,.8,.2,1)}
+.btn,.pill,.ic,.card,.glass,.tab div,.in,.btn b{transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s,border-color .25s,filter .25s}
+.btn{position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-20deg);transition:left .6s var(--ease)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(140,80,255,.45);border-color:rgba(255,255,255,.5)}
+.btn:hover::before{left:120%}
+.btn:hover b{transform:translateX(4px) rotate(45deg) scale(1.08);box-shadow:0 0 22px rgba(213,139,255,.8)}
+.btn:active,.pill:active,.ic:active{transform:scale(.95)}
+.pill:hover{transform:translateY(-2px);background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.5)}
+.pill.on:hover{filter:brightness(1.12);box-shadow:0 8px 22px rgba(124,92,255,.5)}
+.ic:hover{transform:scale(1.12) rotate(-6deg);background:rgba(255,255,255,.24);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.card:hover{transform:translateY(-4px);box-shadow:0 22px 44px rgba(20,5,60,.55),0 0 0 1px rgba(255,255,255,.35)}
+.card:active{transform:scale(.985)}
+.card .t{transition:transform .3s var(--ease)}.card:hover .t{transform:translateY(-3px)}
+.glass[onclick]:hover,.glass.row[onclick]:hover{transform:translateY(-3px);background:rgba(255,255,255,.2);box-shadow:0 12px 28px rgba(20,5,60,.4)}
+.tab div:hover{background:rgba(255,255,255,.14);transform:translateY(-3px)}
+.tab .on:hover{background:linear-gradient(135deg,var(--blue),var(--gold))}
+.in:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(213,139,255,.25);background:rgba(255,255,255,.18)}
+#v.enter .body>*,#v.enter .scr>h1,#v.enter .scr>.col>*{animation:up .6s var(--ease) both}
+#v.enter .body>*:nth-child(2),#v.enter .col>*:nth-child(2){animation-delay:.06s}
+#v.enter .body>*:nth-child(3),#v.enter .col>*:nth-child(3){animation-delay:.12s}
+#v.enter .body>*:nth-child(4),#v.enter .col>*:nth-child(4){animation-delay:.18s}
+#v.enter .body>*:nth-child(5),#v.enter .col>*:nth-child(5){animation-delay:.24s}
+#v.enter .body>*:nth-child(n+6),#v.enter .col>*:nth-child(n+6){animation-delay:.3s}
+#v.enter .tab{animation:up .6s .25s var(--ease) both}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+#v.enter .bar i{animation:grow 1.1s .3s var(--ease) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}.bar i{transform-origin:left}
+.hero{animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.04) translateX(-8px)}to{transform:scale(1.12) translateX(10px) translateY(-6px)}}
+.av[style*="96px"]{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 30px rgba(213,139,255,.5);transform:scale(1)}50%{box-shadow:0 0 80px rgba(213,139,255,.95);transform:scale(1.07)}}
+#v.enter .glass .m{animation:up .5s both}
+#v.enter .glass .m:nth-child(1){animation-delay:.5s}#v.enter .glass .m:nth-child(2){animation-delay:1s}#v.enter .glass .m:nth-child(3){animation-delay:1.5s}
+
+/* ---- scroll reveal ---- */
+.rv{opacity:0;transform:translateY(46px) scale(.95);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.show{opacity:1;transform:none}
+.card.rv.show:hover{transform:translateY(-4px)}
+.glass.rv.show[onclick]:hover{transform:translateY(-3px)}
+#v.enter .col>*{animation:none}
+.row[style*="overflow-x:auto"]{scroll-snap-type:x mandatory}.row[style*="overflow-x:auto"]>*{scroll-snap-align:start}
+/* ---- overlays ---- */
+#ov{position:absolute;inset:0;z-index:30;pointer-events:none}
+#ov>*{pointer-events:auto}
+.scrim{position:absolute;inset:0;background:rgba(10,4,30,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fade .3s both}
+.sheet,.side,.popup{position:absolute;background:rgba(36,18,78,.92);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);border:1px solid var(--line);box-shadow:0 -20px 60px rgba(0,0,0,.5)}
+.sheet{left:0;right:0;bottom:0;border-radius:32px 32px 0 0;padding:12px 22px 30px;animation:sheetIn .45s var(--ease) both}
+.grab{display:block;width:44px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 18px}
+.side{top:0;bottom:0;right:0;width:84%;padding:46px 20px 20px;border-radius:32px 0 0 32px;animation:sideIn .45s var(--ease) both;overflow-y:auto}
+.popup{left:50%;top:50%;width:84%;transform:translate(-50%,-50%);border-radius:30px;padding:26px 22px;text-align:center;animation:pop .45s cubic-bezier(.34,1.56,.64,1) both}
+.pi{width:58px;height:58px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,var(--blue),var(--gold));box-shadow:0 0 30px rgba(213,139,255,.6)}
+#ov.out .scrim{animation:fadeOut .3s both}#ov.out .sheet{animation:sheetOut .3s both}#ov.out .side{animation:sideOut .3s both}#ov.out .popup{animation:popOut .25s both}
+.toast{position:absolute;left:50%;bottom:104px;transform:translateX(-50%);z-index:40;padding:12px 20px;border-radius:99px;background:rgba(36,18,78,.95);border:1px solid var(--line);font-size:13px;font-weight:600;white-space:nowrap;animation:toast 2.3s var(--ease) both;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+@keyframes fade{from{opacity:0}}@keyframes fadeOut{to{opacity:0}}
+@keyframes sheetIn{from{transform:translateY(100%)}}@keyframes sheetOut{to{transform:translateY(100%)}}
+@keyframes sideIn{from{transform:translateX(100%)}}@keyframes sideOut{to{transform:translateX(100%)}}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-50%) scale(.6)}}@keyframes popOut{to{opacity:0;transform:translate(-50%,-50%) scale(.85)}}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,24px)}12%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,10px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== full-app additions ===== */
+html,body{overflow:hidden}
+body #app{width:402px;max-width:none;height:874px;max-height:none;flex:none;border-radius:58px;border:10px solid #1a0f33;box-shadow:0 40px 90px rgba(40,20,90,.5)}
+.isl{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:118px;height:34px;border-radius:20px;background:#000;z-index:60;pointer-events:none}
+@media(max-width:520px){body #app{width:100vw;height:100dvh;border:0;border-radius:0;transform:none!important}.isl{display:none}}
+.sb{padding:18px 26px 8px}.hd{margin:0 0 14px}.hd b{font-weight:600}
+.foot{padding:10px 0 26px}.brand{font:700 26px Sora,sans-serif;letter-spacing:-1px;margin-bottom:18px;color:#e6c2ff}
+.hh{margin:20px 0 16px}.srch{width:100%;justify-content:space-between;padding:8px 8px 8px 18px;margin:0 0 16px;cursor:text}
+.bare{background:none;border:0;outline:0;color:#fff;font:500 14px 'Plus Jakarta Sans',system-ui,sans-serif;flex:1;min-width:0}.bare::placeholder{color:var(--mut)}
+.rel{position:relative}.badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;border-radius:9px;background:#ec4899;font:700 10px sans-serif;display:grid;place-items:center;font-style:normal;padding:0 4px}
+.av.sm{width:30px;height:30px;font-size:12px}.ic.sm{width:34px;height:34px;font-size:13px}.av{cursor:pointer}
+.fld{margin-bottom:12px;position:relative}.err{color:#ff8fb5;font-size:12px;margin:6px 10px 0;min-height:0}.err:empty{display:none}.err.form{text-align:center;margin:0 0 12px}
+.eye{position:absolute;right:18px;top:15px;cursor:pointer;opacity:.7}
+textarea.in{height:100px;border-radius:24px;padding:14px 20px;resize:none}select.in{appearance:none;-webkit-appearance:none}select.in option{color:#000}
+.in[readonly]{opacity:.55}.in.tiny{height:42px;padding:0 14px;font-size:13px;width:74px}
+.empty{text-align:center;padding:40px 20px;color:var(--mut)}.empty b{display:block;font-size:34px;margin-bottom:10px}
+.sw{width:50px;height:30px;border-radius:99px;background:var(--line);position:relative;cursor:pointer;flex:none;transition:background .25s}.sw::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .25s var(--ease)}.sw.on{background:linear-gradient(135deg,var(--blue),var(--gold))}.sw.on::after{transform:translateX(20px)}
+.cal{padding:16px}.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:13px}.cg .w{color:var(--mut);font-size:12px;padding:4px 0}
+.dy{background:none;border:0;color:#fff;font:500 13px 'Plus Jakarta Sans',sans-serif;height:38px;border-radius:99px;cursor:pointer;transition:background .2s,transform .2s}.dy:hover:not(.dis){background:rgba(255,255,255,.2);transform:scale(1.1)}.dy.dis{opacity:.28;cursor:not-allowed}.dy.sel{background:linear-gradient(135deg,var(--blue),var(--gold));font-weight:700}.dy.mid{background:rgba(213,139,255,.28);border-radius:8px}
+.dot{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--glass);border:1px solid var(--line);flex:none}
+.sel-item{border-color:var(--gold)!important;background:rgba(213,139,255,.22)!important}
+.dayc{padding:16px;margin-bottom:14px}.act{padding:12px 0;border-top:1px solid var(--line)}.act:first-of-type{border-top:0}.tm{font-size:13px;color:var(--gold);min-width:48px;padding-top:2px}
+.faq{padding:16px 18px;margin-bottom:10px;cursor:pointer}.faq p{max-height:0;overflow:hidden;transition:max-height .35s var(--ease),margin .35s;margin:0}.faq.open p{max-height:140px;margin-top:10px}.faq .ar{transition:transform .3s}.faq.open .ar{transform:rotate(90deg)}
+.nt.unread{border-color:var(--gold);background:rgba(213,139,255,.16)}
+.sk{height:14px;border-radius:8px;background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.22),rgba(255,255,255,.08));background-size:200% 100%;animation:sh 1.2s linear infinite}@keyframes sh{to{background-position:-200% 0}}
+#spin{position:absolute;inset:0;z-index:70;display:none;place-items:center;background:rgba(15,6,35,.45);backdrop-filter:blur(3px)}#spin.on{display:grid}#spin i{width:48px;height:48px;border-radius:50%;border:4px solid rgba(255,255,255,.25);border-top-color:var(--gold);animation:spn .8s linear infinite}@keyframes spn{to{transform:rotate(360deg)}}
+.toast.bad{background:rgba(120,20,60,.96);border-color:#ff8fb5}
+.stat{flex:1;padding:14px;text-align:center}.sp2{height:10px}.card.sm2{min-height:200px}
+button{font-family:inherit}
+
+/* ===== mobile-style scrolling ===== */
+#app{-webkit-user-select:none;user-select:none}.in,.bare,textarea{-webkit-user-select:text;user-select:text}
+.body{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+@media(hover:hover){.body{cursor:grab}.dragging,.dragging *{cursor:grabbing!important}}
+.body>*{translate:0 var(--ov,0px)}.body.rel>*{transition:translate .6s cubic-bezier(.2,1.5,.4,1)}
+.row[style*="overflow-x:auto"]{overscroll-behavior-x:contain;touch-action:pan-x pan-y}.row.dragging{scroll-snap-type:none!important}
+div.card{background-position-y:calc(50% + var(--py,0px))}
+h1.lt{transform-origin:left top;scale:calc(1 - var(--p,0)*.2);translate:0 calc(var(--p,0)*-10px);opacity:calc(1 - var(--p,0)*.45)}
+.hd{margin:0 -20px 14px;padding:4px 20px;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
+.scr.scrolled .hd{background:rgba(24,10,52,.55);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 10px 26px rgba(0,0,0,.28)}
+.tab{translate:0 var(--ty,0px);transition:translate .4s var(--ease)}
+.sheet,.side{overscroll-behavior:contain;overflow-y:auto;max-height:88%;scrollbar-width:none}.side{max-height:none}
+@media(prefers-reduced-motion:reduce){.body>*,h1.lt,.rv{translate:none!important;scale:none!important}}
+
+/* ===== final polish: sliding button, page transitions, tilt ===== */
+.btn b{position:relative;z-index:2}.btn span{position:relative;z-index:2;transition:opacity .3s,letter-spacing .45s var(--ease)}
+.btn .trail{position:absolute;left:6px;top:6px;height:46px;width:46px;border-radius:23px;background:linear-gradient(90deg,rgba(109,92,255,.15),rgba(213,139,255,.6));pointer-events:none;z-index:1}
+.btn.sliding{pointer-events:none}.btn.sliding span{opacity:.5;letter-spacing:.6px}.btn.sliding:hover{transform:none}
+#v.enter.bk .scr{animation:inBk .42s cubic-bezier(.2,.8,.2,1)}@keyframes inBk{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+#v.enter.fwd .scr{animation:in .42s cubic-bezier(.2,.8,.2,1)}
+div.card:hover{filter:saturate(1.18) contrast(1.03)}
+.card.rv.show:hover{transform:perspective(900px) translateY(-4px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+
+/* Final polish: smooth, accessible motion and consistent photo presentation */
+.btn b{flex:0 0 46px;will-change:transform;box-shadow:0 5px 18px rgba(109,92,255,.28)}
+.btn .trail{will-change:width,opacity;filter:blur(.2px)}
+.btn.sliding{overflow:hidden;touch-action:manipulation}
+.btn.sliding b{box-shadow:0 0 28px rgba(213,139,255,.75)}
+.card,[data-ph]{background-position:center;background-size:cover;background-repeat:no-repeat}
+.card[data-ph],.hero[data-ph],div[data-ph]{transition:background-image .35s ease,filter .35s ease,transform .35s var(--ease)}
+.card[data-ph]{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d}
+@media (hover:none){.card:hover,.btn:hover,.pill:hover,.ic:hover{transform:none;box-shadow:none}}
+@media(prefers-reduced-motion:reduce){.hero{animation:none!important}.rv{opacity:1;transform:none;transition:none}}
+
+
+
+/* Explorify intro sequence: animated logo -> 3 onboarding screens -> login */
+.logo-screen{background:radial-gradient(ellipse at 50% 34%,rgba(183,104,255,.36),transparent 42%),linear-gradient(180deg,#35116f 0%,#5d269d 48%,#211044 100%)!important}
+.logo-stage{width:210px;height:210px;position:relative;display:grid;place-items:center;margin:0 auto 18px;animation:logoAppear .9s cubic-bezier(.2,.8,.2,1) both}
+.logo-mark{width:112px;height:112px;display:grid;place-items:center;border-radius:34px;font-size:54px;color:#fff;background:linear-gradient(145deg,#d9a1ff,#8b4cff 58%,#6230c7);box-shadow:0 0 65px rgba(214,153,255,.48),inset 0 1px 1px rgba(255,255,255,.65);animation:logoFloat 2.5s ease-in-out infinite}
+.logo-orbit{position:absolute;border:1px solid rgba(255,255,255,.38);border-radius:50%;inset:10px;animation:orbitSpin 8s linear infinite}.orbit-two{inset:27px;border-style:dashed;animation-direction:reverse;animation-duration:12s}
+.logo-spark{position:absolute;color:#ffe4ff;text-shadow:0 0 18px #f2b5ff;animation:sparkle 1.7s ease-in-out infinite}.spark-one{top:20px;right:22px;font-size:25px}.spark-two{bottom:25px;left:18px;font-size:20px;animation-delay:.7s}
+.logo-word{font-size:36px;letter-spacing:-1.5px;animation:logoAppear 1.1s .2s both}.logo-dot{color:#e5b5ff}.logo-screen .flight-track{width:100%;margin:28px 0 22px;background:rgba(255,255,255,.07)}
+@keyframes logoAppear{from{opacity:0;transform:translateY(18px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}@keyframes sparkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.18)}}
+
+/* Explorify status bar: keep icons visible; remove only the glass/gradient panel behind them */
+#app{background:#24104f!important}
+#v,.scr,.sb{background-color:transparent!important}
+.scr{background-image:linear-gradient(180deg,rgba(87,37,157,.22),transparent 26%)}
+.sb{display:flex!important;position:relative;z-index:2;color:#fff!important;isolation:auto;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;border:0!important}
+.sb::before{content:none!important;display:none!important}
+.isl{background:#000!important;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.flight-track{position:relative;height:116px;margin:24px 0 18px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.14)}
+.flight-track:before{content:"";position:absolute;left:8%;right:8%;top:62%;height:1px;border-top:2px dashed rgba(255,255,255,.38);transform:rotate(-8deg)}
+.flight-plane{position:absolute;left:8%;top:44%;font-size:38px;filter:drop-shadow(0 8px 14px rgba(10,4,30,.35));animation:planeFly 3.2s cubic-bezier(.2,.7,.2,1) infinite alternate}
+.flight-glow{position:absolute;width:54px;height:54px;left:10%;top:28%;border-radius:50%;background:rgba(213,139,255,.38);filter:blur(20px);animation:planeGlow 3.2s ease-in-out infinite alternate}
+@keyframes planeFly{from{transform:translate(0,10px) rotate(-9deg)}to{transform:translate(220px,-18px) rotate(-4deg)}}
+@keyframes planeGlow{from{left:8%;opacity:.5}to{left:75%;opacity:1}}
+.brand{ text-shadow:0 4px 28px rgba(213,139,255,.25)}
+@media(max-width:520px){.sb::before{content:none!important;display:none!important}}
+@media(prefers-reduced-motion:reduce){.flight-plane,.flight-glow{animation:none!important}}
+
+
+/* Final polish: abstract logo animation and full-bleed onboarding photography */
+.logo-mark{font-size:0!important;position:relative;border-radius:36px!important;background:linear-gradient(145deg,#f0caff 0%,#a66bff 42%,#6329ce 100%)!important}
+.logo-mark:before{content:"E";font-size:68px;font-weight:800;letter-spacing:-7px;color:#fff;text-shadow:0 5px 22px rgba(47,12,95,.28);animation:letterPulse 2.4s ease-in-out infinite}
+.logo-mark:after{content:"";position:absolute;inset:-9px;border:2px solid rgba(255,255,255,.42);border-radius:43px;animation:logoHalo 2.8s ease-out infinite}
+@keyframes letterPulse{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.08);filter:brightness(1.18)}}
+@keyframes logoHalo{0%{transform:scale(.88);opacity:.75}100%{transform:scale(1.32);opacity:0}}
+.logo-screen .flight-track{display:none!important}
+.onb.scr{position:relative;isolation:isolate;overflow:hidden;padding:0!important;gap:0!important;background:#211044!important}
+.onb .onb-photo{position:absolute;inset:0;z-index:-2;background-position:center;background-size:cover;background-repeat:no-repeat;transform:scale(1.02);animation:onbPhotoIn .8s ease-out both}
+.onb .onb-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(24,8,55,.08) 0%,rgba(24,8,55,.05) 35%,rgba(24,8,55,.72) 63%,#211044 100%)}
+.onb .onb-top{padding:calc(env(safe-area-inset-top,0px) + 22px) 22px 0;display:flex;align-items:center;justify-content:space-between}
+.onb .onb-bottom{margin-top:auto;padding:24px 24px 30px}
+.onb .onb-bottom h1{font-size:32px;line-height:1.12;letter-spacing:-1.1px;margin:16px 0 10px}
+.onb .onb-bottom p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.84);margin:0 0 20px}
+.onb .onb-bottom .dots{margin:0 0 20px}
+.onb .onb-bottom .btn{width:100%}
+@keyframes onbPhotoIn{from{opacity:.65;transform:scale(1.09)}to{opacity:1;transform:scale(1.02)}}
+@media(prefers-reduced-motion:reduce){.logo-mark:before,.logo-mark:after,.onb .onb-photo{animation:none!important}}
+
+
+/* Explorify requested final intro/login refresh — home screen intentionally unchanged */
+.splash-premium{background:radial-gradient(ellipse at 50% 34%,rgba(190,127,255,.34),transparent 40%),linear-gradient(180deg,#160b3b 0%,#382079 52%,#100923 100%)!important}
+.splash-top{width:100%;display:flex;justify-content:center;padding-top:18px}.splash-mini{font-size:9px;letter-spacing:2.1px;color:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:9px 13px;background:rgba(255,255,255,.045)}
+.splash-premium .logo-stage{width:230px;height:230px;margin:auto}.splash-premium .logo-mark{width:116px;height:116px;border-radius:38px!important}.splash-premium .logo-orbit{inset:0;border-color:rgba(215,180,255,.48);transform:rotate(-24deg) scaleY(.58)}.splash-premium .orbit-two{inset:22px;transform:rotate(35deg) scaleY(.68)}.logo-ring-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:#ffe4ff;box-shadow:0 0 18px #e9aaff;top:35px;right:31px;animation:sparkle 1.8s infinite}.splash-copy{width:100%;padding-bottom:8px}.splash-copy .logo-word{font-size:38px;font-weight:700}.splash-copy>p{margin:10px 0 26px;color:rgba(255,255,255,.75);font-size:14px}.splash-rule{display:flex;align-items:center;justify-content:center;gap:10px;font-size:8px;letter-spacing:1.5px;color:rgba(255,255,255,.56);margin-bottom:24px}.splash-rule i{height:1px;width:24px;background:rgba(255,255,255,.25)}
+.onb.scr{background:#110923!important}.onb .onb-photo{inset:-2px;background-size:cover!important;background-position:center!important;transform:scale(1.035);filter:saturate(1.06);animation:onbPhotoIn 1s cubic-bezier(.2,.7,.2,1) both}.onb .onb-shade{background:linear-gradient(180deg,rgba(9,5,25,.12) 0%,rgba(9,5,25,.02) 28%,rgba(12,5,29,.25) 43%,rgba(12,5,29,.88) 72%,#110923 100%)}.onb .onb-top{padding-top:calc(env(safe-area-inset-top,0px) + 20px)}.onb .onb-bottom{padding:22px 22px 28px}.onb .onb-bottom h1{font-size:31px;max-width:300px}.onb .onb-bottom p{font-size:13px;max-width:300px}.onb .onb-bottom .btn{box-shadow:0 10px 32px rgba(110,70,255,.28)}
+.login-premium{padding:0 0 18px!important;overflow-y:auto;background:linear-gradient(180deg,#1b0d48,#100923)!important}.login-art{min-height:255px;flex:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 58%,rgba(176,98,255,.45),transparent 48%),linear-gradient(180deg,#180b43,#3e1e7c 80%,#24104e);border-radius:0 0 32px 32px}.login-art:after{content:"";position:absolute;bottom:-70px;left:-12%;width:124%;height:130px;border-radius:50%;border-top:1px solid rgba(255,255,255,.2);box-shadow:0 -12px 40px rgba(178,116,255,.1)}.login-art-glow{position:absolute;width:190px;height:190px;border-radius:50%;background:rgba(159,89,255,.16);filter:blur(22px);animation:logoHalo 3.2s ease-out infinite}.login-brand-mark{width:66px;height:66px;border-radius:23px;background:linear-gradient(145deg,#e5c6ff,#9659ff 60%,#632ed0);box-shadow:0 10px 45px rgba(194,139,255,.32);display:grid;place-items:center;position:relative;animation:logoFloat 3s ease-in-out infinite}.login-brand-mark span{font-size:43px;line-height:1;font-weight:800;color:white;letter-spacing:-5px;margin-left:-4px}.login-brand-mark i{position:absolute;width:82px;height:82px;border:1px solid rgba(255,255,255,.3);border-radius:28px;transform:rotate(22deg)}.login-brand-name{font-family:Sora,sans-serif;font-size:28px;font-weight:700;letter-spacing:-1px;margin-top:12px}.login-brand-name span{color:#d6a3ff}.login-art>p{margin-top:5px;color:rgba(255,255,255,.7);font-size:12px}.login-panel{padding:24px 22px 0;display:flex;flex-direction:column;gap:12px}.login-tabs{display:flex;gap:6px;padding:5px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);margin-bottom:5px}.login-tabs span{width:50%;text-align:center;padding:10px;border-radius:99px;font-size:12px;color:rgba(255,255,255,.62);cursor:pointer}.login-tabs .active{color:white;background:linear-gradient(135deg,#7650ff,#a15cff);font-weight:700}.login-panel h1{font-size:27px}.login-sub{margin-top:-7px;margin-bottom:3px}.login-panel .in{height:52px}.login-forgot{text-align:right;margin-top:-3px;cursor:pointer;color:#d8b5ff;font-size:12px}.login-panel .btn{margin-top:2px;background:linear-gradient(100deg,#7047f5,#9a52ff);border:0;box-shadow:0 10px 28px rgba(112,71,245,.23)}.login-panel .btn b{background:rgba(255,255,255,.2)}.login-divider{display:flex;align-items:center;justify-content:center;gap:10px;font-size:10px;color:rgba(255,255,255,.48);margin-top:3px}.login-divider span{height:1px;flex:1;background:rgba(255,255,255,.13)}.login-social{display:flex;gap:12px}.login-social button{flex:1;height:45px;border-radius:99px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.16);color:#fff;font-size:17px;font-weight:700}.login-terms{text-align:center;font-size:9px;line-height:1.5;margin:0 10px 8px;color:rgba(255,255,255,.45)}.login-panel .err{color:#ff9cb9}
+
+
+/* ONLY requested change: make the three onboarding screens and their photos fill the existing phone viewport. Keep every other screen and behavior unchanged. */
+#v > .scr.onb{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100%!important;margin:0!important;padding:0!important;overflow:hidden!important}
+#v > .scr.onb > .onb-photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-size:cover!important;background-position:center center!important;background-repeat:no-repeat!important}
+#v > .scr.onb > .onb-shade{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+</style></head>
+<body><div id="app"><div class="bg"></div><div class="isl"></div><div id="v"></div><div id="ov"></div><div id="spin"><i></i></div></div>
+<script>try{localStorage.setItem('_t','1');localStorage.removeItem('_t')}catch(e){Object.defineProperty(window,'localStorage',{value:(()=>{const m={};return{getItem:k=>k in m?m[k]:null,setItem:(k,v)=>{m[k]=String(v)},removeItem:k=>{delete m[k]}}})()})}
+(function(){
+'use strict';
+const SHOW_RESET_CODE=true,ANY_LOGIN=true;
+// Demo destination catalogue (seed data). Replace with a live travel API if you have keys.
+const mk = (id, name, country, region, category, min, max, rating, km, img, tags, desc, hotels, acts) => ({
+  id, name, country, region, category, priceMin: min, priceMax: max, rating, distanceKm: km, img, tags, desc,
+  hotels: hotels.map((h, i) => ({ id: id * 10 + i + 1, name: h[0], pricePerNight: h[1], rating: h[2], amenities: h[3], desc: `A comfortable stay in ${region} with local character and great views.` })),
+  activities: acts.map((a) => { const [title, tag] = a.split('|'); return { title, tag }; }),
+});
+const W = ['Wifi', 'Pool', 'Breakfast'], X = ['Wifi', 'Spa', 'Bar'];
+const DESTS = [
+  mk(1, 'Bratan Lake', 'Indonesia', 'Bali', 'Nature', 350, 950, 4.8, 35, 'i2', ['Nature', 'Culture', 'Relax'], 'A quiet escape with temples, water, and mountain views.', [['Lakeside Villa', 140, 4.7, W], ['Ubud Jungle Retreat', 95, 4.5, X]],
+    ['Ulun Danu Beratan temple visit|Culture', 'Sunrise boat ride on the lake|Nature', 'Jatiluwih rice terrace trek|Nature', 'Balinese cooking class|Food', 'Ubud art market|Culture', 'Spa and massage evening|Relax']),
+  mk(2, 'Mount Bromo', 'Indonesia', 'East Java', 'Mountain', 420, 1100, 4.9, 52, 'i1', ['Adventure', 'Nature'], 'Volcano sunrises, ancient temples and misty highlands.', [['Bromo View Lodge', 80, 4.4, ['Wifi', 'Breakfast']], ['Cemoro Highland Hotel', 120, 4.6, W]],
+    ['Sunrise jeep tour at Penanjakan|Adventure', 'Crater rim hike|Adventure', 'Sea of sand horse ride|Nature', 'Madakaripura waterfall|Nature', 'Local village food walk|Food', 'Stargazing at the caldera|Relax']),
+  mk(3, 'Santorini Dusk', 'Greece', 'Cyclades', 'Beach', 600, 1600, 4.7, 18, 'i3', ['Relax', 'Food', 'Nightlife'], 'Whitewashed cliffs and golden sunsets over the caldera.', [['Caldera Suites', 260, 4.8, X], ['Oia Cave House', 180, 4.6, W]],
+    ['Oia sunset viewpoint|Relax', 'Caldera catamaran cruise|Relax', 'Wine tasting at Santo|Food', 'Red Beach walk|Nature', 'Fira nightlife stroll|Nightlife', 'Ancient Akrotiri tour|Culture']),
+  mk(4, 'Interlaken Alps', 'Switzerland', 'Bernese Oberland', 'Mountain', 800, 2000, 4.8, 41, 'i4', ['Adventure', 'Nature'], 'Snowy peaks, glacial lakes and scenic rail journeys.', [['Alpine Chalet Hotel', 220, 4.7, W], ['Lake Brienz Inn', 150, 4.5, ['Wifi', 'Breakfast']]],
+    ['Jungfraujoch train ride|Adventure', 'Paragliding over the valley|Adventure', 'Lake Thun boat tour|Nature', 'Swiss chocolate workshop|Food', 'Harder Kulm viewpoint|Nature', 'Old town fondue dinner|Food']),
+  mk(5, 'Kyoto Gardens', 'Japan', 'Kansai', 'Culture', 700, 1500, 4.9, 27, 'i5', ['Culture', 'Food', 'Relax'], 'Temples, tea houses and lantern lit streets.', [['Gion Machiya Stay', 190, 4.8, ['Wifi', 'Breakfast']], ['Arashiyama Ryokan', 240, 4.9, X]],
+    ['Fushimi Inari torii gates|Culture', 'Kinkaku-ji golden pavilion|Culture', 'Traditional tea ceremony|Culture', 'Nishiki market food crawl|Food', 'Arashiyama bamboo grove|Nature', 'Evening in Gion district|Relax']),
+  mk(6, 'Rome Highlights', 'Italy', 'Lazio', 'City', 650, 1400, 4.6, 12, 'i3', ['Culture', 'Food', 'Nightlife'], 'Ancient ruins, piazzas and unforgettable food.', [['Trastevere Boutique', 170, 4.5, W], ['Colosseo Grand', 230, 4.7, X]],
+    ['Colosseum and Forum tour|Culture', 'Vatican Museums visit|Culture', 'Trevi Fountain at night|Nightlife', 'Pasta making class|Food', 'Gelato walk in Trastevere|Food', 'Villa Borghese gardens|Relax']),
+  mk(7, 'Maldives Atoll', 'Maldives', 'Baa Atoll', 'Beach', 1200, 3500, 4.9, 60, 'i2', ['Relax', 'Nature'], 'Overwater villas, turquoise lagoons and coral reefs.', [['Overwater Villa Resort', 480, 4.9, X], ['Reef Island Lodge', 260, 4.6, W]],
+    ['Snorkel with manta rays|Nature', 'Sandbank picnic|Relax', 'Sunset dolphin cruise|Nature', 'Private beach dinner|Food', 'Stand-up paddle lagoon|Adventure', 'Spa over the water|Relax']),
+  mk(8, 'Tokyo Neon', 'Japan', 'Kanto', 'City', 900, 1900, 4.7, 22, 'i1', ['Food', 'Nightlife', 'Culture'], 'Neon streets, sushi counters and quiet shrines.', [['Shinjuku Sky Hotel', 210, 4.6, X], ['Asakusa Capsule Plus', 70, 4.2, ['Wifi']]],
+    ['Tsukiji outer market breakfast|Food', 'Shibuya Crossing and Sky|Nightlife', 'Senso-ji temple|Culture', 'Akihabara arcade night|Nightlife', 'Meiji Shrine walk|Culture', 'Ramen alley tour|Food']),
+  mk(9, 'Banff Rockies', 'Canada', 'Alberta', 'Mountain', 750, 1800, 4.8, 44, 'i4', ['Adventure', 'Nature'], 'Turquoise lakes, glaciers and wildlife in the Rockies.', [['Moraine Lodge', 250, 4.7, W], ['Banff Springs Inn', 190, 4.5, X]],
+    ['Lake Louise canoe|Nature', 'Johnston Canyon walk|Nature', 'Banff Gondola summit|Adventure', 'Icefields Parkway drive|Adventure', 'Hot springs soak|Relax', 'Wildlife spotting tour|Nature']),
+  mk(10, 'Marrakech Souks', 'Morocco', 'Marrakech-Safi', 'Culture', 400, 1000, 4.5, 15, 'i5', ['Culture', 'Food', 'Adventure'], 'Colourful souks, riads and desert day trips.', [['Riad Jasmine', 90, 4.6, ['Wifi', 'Breakfast']], ['Medina Palace Hotel', 160, 4.5, W]],
+    ['Jemaa el-Fnaa square evening|Food', 'Bahia Palace tour|Culture', 'Souk shopping with a guide|Culture', 'Majorelle Garden|Nature', 'Atlas mountains day trip|Adventure', 'Hammam and spa|Relax']),
+];
+
+let db={users:[],favorites:[],trips:[],notifications:[],tickets:[],seq:1};
+try{Object.assign(db,JSON.parse(localStorage.getItem('xp_demo_db')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('xp_demo_db',JSON.stringify(db))}catch(e){}};
+const nid=()=>db.seq++;const uid=()=>Math.random().toString(16).slice(2,12);
+const hmac=(s)=>{let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return 'h'+(h>>>0).toString(36)+s.length};
+const sign=(p)=>btoa(JSON.stringify(p));const verify=(t)=>{try{const p=JSON.parse(atob(t));return p.exp>Date.now()?p:null}catch(e){return null}};
+const hashPw=(pw)=>'demo:'+hmac('salt'+pw);const checkPw=(pw,s)=>s===hashPw(pw);
+const hits=new Map();
+function limit(key,max=10,ms=600000){const now=Date.now(),r=(hits.get(key)||[]).filter(t=>now-t<ms);if(r.length>=max)throw new HttpError(429,'Too many attempts. Please try again in a few minutes.');r.push(now);hits.set(key,r)}
+/* ---------- utils & validation ---------- */
+class HttpError extends Error { constructor(code, msg) { super(msg); this.code = code; } }
+const bad = (m) => { throw new HttpError(400, m); };
+const str = (v, name, min, max, optional) => {
+  if (v === undefined || v === null || v === '') { if (optional) return ''; bad(`${name} is required`); }
+  if (typeof v !== 'string') bad(`${name} must be text`);
+  v = v.trim(); if (v.length < min) bad(`${name} must be at least ${min} characters`); if (v.length > max) bad(`${name} must be at most ${max} characters`); return v;
+};
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const email = (v) => { v = str(v, 'Email', 3, 120).toLowerCase(); if (!EMAIL.test(v)) bad('Enter a valid email address'); return v; };
+const password = (v) => { if (typeof v !== 'string' || v.length < 8) bad('Password must be at least 8 characters'); if (v.length > 100) bad('Password is too long'); if (!/[A-Za-z]/.test(v) || !/\d/.test(v)) bad('Password must contain a letter and a number'); return v; };
+const okDate = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && !isNaN(Date.parse(s));
+const dayDiff = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+const todayStr = (off = 0) => new Date(Date.now() + off * 864e5).toISOString().slice(0, 10);
+const pub = (u) => ({ id: u.id, name: u.name, email: u.email, phone: u.phone, city: u.city, bio: u.bio, settings: u.settings, createdAt: u.createdAt });
+const brief = ({ hotels, activities, ...d }) => d;
+const INTERESTS = ['Culture', 'Beach', 'Food', 'Adventure', 'Nature', 'Nightlife', 'Shopping', 'Wellness', 'Relax'];
+const CATS = ['Beach', 'Mountain', 'City', 'Culture', 'Nature'];
+
+function notify(userId, title, body, key) {
+  if (key && db.notifications.some((n) => n.userId === userId && n.key === key)) return;
+  db.notifications.unshift({ id: nid(), userId, title, body, key: key || null, read: false, createdAt: new Date().toISOString() });
+}
+
+/* ---------- trip planner (rule-based "AI": picks activities matching interests) ---------- */
+const tripDays = (t) => dayDiff(t.start, t.end) + 1;
+function genDay(d, trip, i, n, pool, k) {
+  const times = ['09:00', '13:00', '18:00'], notes = ['Morning', 'Afternoon', 'Evening'], items = [];
+  for (let j = 0; j < 3; j++) {
+    const a = pool[(k + j) % pool.length];
+    let title = a.title;
+    if (i === 0 && j === 0) title = 'Arrive & check in';
+    else if (i === n - 1 && j === 2) title = 'Pack up & departure';
+    else if (k + j >= pool.length) title += ' (second visit)';
+    items.push({ id: uid(), time: times[j], title, note: `${notes[j]} · ${a.tag}` });
+  }
+  return { theme: i === 0 ? 'Arrival' : i === n - 1 ? 'Departure' : pool[k % pool.length].tag, items };
+}
+function plan(trip) {
+  const d = DESTS.find((x) => x.id === trip.destId), n = Math.min(tripDays(trip), 30);
+  const want = new Set([...trip.interests, ...(trip.interests.length ? [] : d.tags)]);
+  const pri = d.activities.filter((a) => want.has(a.tag)), pool = [...pri, ...d.activities.filter((a) => !pri.includes(a))];
+  return Array.from({ length: n }, (_, i) => genDay(d, trip, i, n, pool, i * 3));
+}
+function fitItinerary(trip) {
+  const n = Math.min(tripDays(trip), 30), d = DESTS.find((x) => x.id === trip.destId);
+  trip.itinerary = trip.itinerary.slice(0, n);
+  const pool = d.activities;
+  while (trip.itinerary.length < n) trip.itinerary.push(genDay(d, trip, trip.itinerary.length, n, pool, trip.itinerary.length * 3));
+}
+function cleanItin(v) {
+  if (!Array.isArray(v) || v.length > 30) bad('Invalid itinerary');
+  return v.map((day) => {
+    if (!day || !Array.isArray(day.items) || day.items.length > 20) bad('Invalid itinerary day');
+    return { theme: str(day.theme || 'Day', 'Theme', 1, 40), items: day.items.map((it) => ({ id: typeof it.id === 'string' && it.id.length < 20 ? it.id : uid(), time: str(it.time || '09:00', 'Time', 1, 10), title: str(it.title, 'Activity title', 1, 120), note: str(it.note || '', 'Note', 0, 200, true) })) };
+  });
+}
+function cleanTrip(b, cur) {
+  const o = {}, has = (k) => b[k] !== undefined;
+  if (!cur || has('destId')) { o.destId = Number(b.destId); if (!DESTS.some((d) => d.id === o.destId)) bad('Choose a valid destination'); }
+  if (!cur || has('name')) o.name = str(b.name, 'Trip name', 2, 60);
+  if (!cur || has('start') || has('end')) {
+    const s = has('start') ? b.start : cur.start, e = has('end') ? b.end : cur.end;
+    if (!okDate(s) || !okDate(e)) bad('Select valid start and end dates');
+    if (s < todayStr(-1) && !cur) bad('Start date cannot be in the past');
+    if (e < s) bad('End date must be on or after the start date');
+    if (dayDiff(s, e) > 29) bad('Trips can be at most 30 days');
+    o.start = s; o.end = e;
+  }
+  if (!cur || has('travellers')) { const n = Number(b.travellers); if (!Number.isInteger(n) || n < 1 || n > 20) bad('Travellers must be between 1 and 20'); o.travellers = n; }
+  if (!cur || has('budget')) { const n = Number(b.budget); if (!(n >= 100 && n <= 1000000)) bad('Budget must be between 100 and 1,000,000'); o.budget = Math.round(n); }
+  if (!cur || has('interests')) { if (!Array.isArray(b.interests)) bad('Interests must be a list'); o.interests = [...new Set(b.interests.filter((x) => INTERESTS.includes(x)))]; }
+  if (has('hotelId')) { if (b.hotelId === null) o.hotelId = null; else { const d = DESTS.find((x) => x.id === (o.destId || cur.destId)); if (!d.hotels.some((h) => h.id === Number(b.hotelId))) bad('Hotel does not belong to this destination'); o.hotelId = Number(b.hotelId); } }
+  if (has('itinerary')) o.itinerary = cleanItin(b.itinerary);
+  return o;
+}
+const ownTrip = (ctx) => { const t = db.trips.find((x) => x.id === Number(ctx.p.id) && x.userId === ctx.user.id); if (!t) throw new HttpError(404, 'Trip not found'); return t; };
+
+/* ---------- routes ---------- */
+const R = [];
+const route = (m, p, auth, h) => R.push({ m, auth, h, re: new RegExp('^' + p.replace(/:(\w+)/g, '(?<$1>[^/]+)') + '$') });
+const session = (u) => ({ token: sign({ uid: u.id, exp: Date.now() + 7 * 864e5 }), user: pub(u) });
+
+function newUser(name, em, pw) {
+  const u = { id: nid(), name, email: em, pw: hashPw(pw), phone: '', city: '', bio: '', settings: { push: true, reminders: true, deals: false, currency: 'USD', units: 'km' }, createdAt: new Date().toISOString() };
+  db.users.push(u); notify(u.id, 'Welcome to Explorify ✦', 'Start by exploring destinations and creating your first trip.'); save();
+  return u;
+}
+route('POST', '/auth/signup', false, ({ body, req }) => {
+  limit('su:' + req.socket.remoteAddress, 20);
+  const name = str(body.name, 'Name', 2, 60), em = email(body.email), pw = password(body.password);
+  if (db.users.some((u) => u.email === em)) throw new HttpError(409, 'An account with this email already exists');
+  const u = newUser(name, em, pw);
+  return session(u);
+});
+route('POST', '/auth/login', false, ({ body, req }) => {
+  if (ANY_LOGIN) {
+    const id = String(body.email || body.id || '').trim().toLowerCase().slice(0, 60) || 'guest';
+    let u = db.users.find((x) => x.email === id);
+    if (!u) { const nm = id.split('@')[0].replace(/[^a-z0-9]+/gi, ' ').trim().replace(/\b\w/g, (c) => c.toUpperCase()).slice(0, 60); u = newUser(nm.length >= 2 ? nm : 'Guest ' + nm, id, String(body.password || 'demo') + '1a'); }
+    return session(u);
+  }
+  const em = email(body.email); limit('li:' + req.socket.remoteAddress + em);
+  const u = db.users.find((x) => x.email === em);
+  if (!u || typeof body.password !== 'string' || !checkPw(body.password, u.pw)) throw new HttpError(401, 'Incorrect email or password');
+  return session(u);
+});
+route('POST', '/auth/forgot', false, ({ body, req }) => {
+  const em = email(body.email); limit('fg:' + req.socket.remoteAddress + em, 5);
+  const u = db.users.find((x) => x.email === em);
+  const out = { ok: true, message: 'If this email is registered, a reset code has been generated.' };
+  if (u) { const code = String((100000 + Math.floor(Math.random() * 900000))); u.reset = { hash: hmac(em + code), exp: Date.now() + 15 * 60000, tries: 0 }; save(); if (SHOW_RESET_CODE) out.demoCode = code; }
+  return out;
+});
+route('POST', '/auth/reset', false, ({ body, req }) => {
+  const em = email(body.email), pw = password(body.password); limit('rs:' + req.socket.remoteAddress + em, 10);
+  const u = db.users.find((x) => x.email === em);
+  if (!u || !u.reset || u.reset.exp < Date.now() || u.reset.tries >= 5) throw new HttpError(400, 'Reset code is invalid or expired');
+  if (hmac(em + String(body.code || '').trim()) !== u.reset.hash) { u.reset.tries++; save(); throw new HttpError(400, 'Reset code is invalid or expired'); }
+  u.pw = hashPw(pw); delete u.reset; notify(u.id, 'Password changed', 'Your password was reset successfully.'); save();
+  return { ok: true };
+});
+route('GET', '/me', true, ({ user }) => pub(user));
+route('PUT', '/me', true, ({ user, body }) => {
+  if (body.name !== undefined) user.name = str(body.name, 'Name', 2, 60);
+  if (body.phone !== undefined) { const p = str(body.phone, 'Phone', 0, 20, true); if (p && !/^[0-9+()\-\s]{6,20}$/.test(p)) bad('Enter a valid phone number'); user.phone = p; }
+  if (body.city !== undefined) user.city = str(body.city, 'City', 0, 60, true);
+  if (body.bio !== undefined) user.bio = str(body.bio, 'Bio', 0, 200, true);
+  save(); return pub(user);
+});
+route('PUT', '/me/settings', true, ({ user, body }) => {
+  const s = user.settings;
+  for (const k of ['push', 'reminders', 'deals']) if (body[k] !== undefined) s[k] = !!body[k];
+  if (body.currency !== undefined) { if (!['USD', 'EUR', 'INR'].includes(body.currency)) bad('Unsupported currency'); s.currency = body.currency; }
+  if (body.units !== undefined) { if (!['km', 'mi'].includes(body.units)) bad('Unsupported unit'); s.units = body.units; }
+  save(); return pub(user);
+});
+route('POST', '/me/password', true, ({ user, body }) => {
+  limit('pw:' + user.id, 8);
+  if (typeof body.current !== 'string' || !checkPw(body.current, user.pw)) throw new HttpError(400, 'Current password is incorrect');
+  user.pw = hashPw(password(body.password)); notify(user.id, 'Password changed', 'Your password was updated.'); save(); return { ok: true };
+});
+route('DELETE', '/me', true, ({ user }) => {
+  db.users = db.users.filter((u) => u.id !== user.id);
+  for (const k of ['favorites', 'trips', 'notifications', 'tickets']) db[k] = db[k].filter((x) => x.userId !== user.id);
+  save(); return { ok: true };
+});
+
+route('GET', '/destinations', false, ({ q }) => {
+  let r = DESTS.slice(); const s = (q.get('q') || '').trim().toLowerCase();
+  if (s) r = r.filter((d) => [d.name, d.country, d.region, d.category, ...d.tags].join(' ').toLowerCase().includes(s));
+  const cat = q.get('category'); if (cat && cat !== 'All') { if (!CATS.includes(cat)) bad('Unknown category'); r = r.filter((d) => d.category === cat); }
+  const mb = q.get('maxBudget'); if (mb) { if (isNaN(+mb)) bad('Invalid budget'); r = r.filter((d) => d.priceMin <= +mb); }
+  const mr = q.get('minRating'); if (mr) { if (isNaN(+mr)) bad('Invalid rating'); r = r.filter((d) => d.rating >= +mr); }
+  const prefs = (q.get('prefs') || '').split(',').filter(Boolean); if (prefs.length) r = r.filter((d) => prefs.some((p) => d.tags.includes(p)));
+  const sort = q.get('sort') || 'popular';
+  r.sort(sort === 'price' ? (a, b) => a.priceMin - b.priceMin : sort === 'nearest' ? (a, b) => a.distanceKm - b.distanceKm : (a, b) => b.rating - a.rating || a.id - b.id);
+  return r.map(brief);
+});
+route('GET', '/destinations/:id', false, ({ p }) => { const d = DESTS.find((x) => x.id === Number(p.id)); if (!d) throw new HttpError(404, 'Destination not found'); return d; });
+
+route('GET', '/favorites', true, ({ user }) => db.favorites.filter((f) => f.userId === user.id).map((f) => f.destId));
+route('PUT', '/favorites/:id', true, ({ user, p }) => {
+  const id = Number(p.id); if (!DESTS.some((d) => d.id === id)) throw new HttpError(404, 'Destination not found');
+  if (!db.favorites.some((f) => f.userId === user.id && f.destId === id)) { db.favorites.push({ userId: user.id, destId: id }); save(); }
+  return { ok: true };
+});
+route('DELETE', '/favorites/:id', true, ({ user, p }) => { db.favorites = db.favorites.filter((f) => !(f.userId === user.id && f.destId === Number(p.id))); save(); return { ok: true }; });
+route('DELETE', '/favorites', true, ({ user }) => { db.favorites = db.favorites.filter((f) => f.userId !== user.id); save(); return { ok: true }; });
+
+route('GET', '/trips', true, ({ user }) => db.trips.filter((t) => t.userId === user.id).sort((a, b) => a.start.localeCompare(b.start)));
+route('POST', '/trips', true, ({ user, body }) => {
+  const o = cleanTrip(body), t = { id: nid(), userId: user.id, hotelId: null, itinerary: [], expenses: [], ...o, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+  t.itinerary = plan(t); db.trips.push(t);
+  notify(user.id, 'Trip created ✈', `${t.name} is planned for ${t.start} - ${t.end}.`); save(); return t;
+});
+route('GET', '/trips/:id', true, (c) => ownTrip(c));
+route('PUT', '/trips/:id', true, (c) => {
+  const t = ownTrip(c), o = cleanTrip(c.body, t), before = t.start + t.end + t.destId;
+  Object.assign(t, o);
+  if (o.destId && o.destId !== t.destId) t.hotelId = null;
+  if (!o.itinerary && t.start + t.end + t.destId !== before) { if (o.destId) t.itinerary = plan(t); else fitItinerary(t); }
+  t.updatedAt = new Date().toISOString(); save(); return t;
+});
+route('DELETE', '/trips/:id', true, (c) => { const t = ownTrip(c); db.trips = db.trips.filter((x) => x.id !== t.id); notify(c.user.id, 'Trip deleted', `${t.name} was removed.`); save(); return { ok: true }; });
+route('POST', '/trips/:id/plan', true, (c) => { const t = ownTrip(c); t.itinerary = plan(t); t.updatedAt = new Date().toISOString(); save(); return t; });
+route('POST', '/trips/:id/expenses', true, (c) => {
+  const t = ownTrip(c), cat = c.body.category;
+  if (!['Flights', 'Hotel', 'Food', 'Activities', 'Transport', 'Other'].includes(cat)) bad('Choose a valid category');
+  const amount = Number(c.body.amount); if (!(amount > 0 && amount <= 10000000)) bad('Enter a valid amount');
+  t.expenses.push({ id: uid(), title: str(c.body.title, 'Title', 1, 60), category: cat, amount: Math.round(amount * 100) / 100, date: todayStr() });
+  save(); return t;
+});
+route('DELETE', '/trips/:id/expenses/:eid', true, (c) => { const t = ownTrip(c); t.expenses = t.expenses.filter((e) => e.id !== c.p.eid); save(); return t; });
+
+route('GET', '/notifications', true, ({ user }) => {
+  if (user.settings.reminders) for (const t of db.trips.filter((x) => x.userId === user.id)) { const d = dayDiff(todayStr(), t.start); if (d >= 0 && d <= 7) notify(user.id, 'Trip reminder ⏰', `${t.name} starts ${d === 0 ? 'today' : `in ${d} day${d > 1 ? 's' : ''}`}. Pack your bags!`, 'rem-' + t.id); }
+  save(); return db.notifications.filter((n) => n.userId === user.id);
+});
+route('POST', '/notifications/read', true, ({ user, body }) => { db.notifications.forEach((n) => { if (n.userId === user.id && (body.all || n.id === Number(body.id))) n.read = true; }); save(); return { ok: true }; });
+route('DELETE', '/notifications/:id', true, ({ user, p }) => { db.notifications = db.notifications.filter((n) => !(n.userId === user.id && n.id === Number(p.id))); save(); return { ok: true }; });
+
+route('POST', '/support', true, ({ user, body }) => {
+  limit('sup:' + user.id, 10);
+  const t = { id: nid(), userId: user.id, subject: str(body.subject, 'Subject', 3, 80), message: str(body.message, 'Message', 10, 1000), createdAt: new Date().toISOString(), status: 'Open' };
+  db.tickets.push(t); notify(user.id, 'Support request received', `We got "${t.subject}" and will reply soon.`); save(); return t;
+});
+route('GET', '/support', true, ({ user }) => db.tickets.filter((t) => t.userId === user.id).reverse());
+
+
+const realFetch=window.fetch.bind(window);
+/* Explorify local demo API: routes are handled in this HTML file; no server.js is needed. */
+window.__EXPLORIFY_LOCAL_API__ = true;
+window.fetch=async function(url,o={}){
+  let u;
+  try { u = new URL(typeof url === 'string' ? url : (url && url.url) || String(url), location.href); }
+  catch (e) { return realFetch(url,o); }
+  if(!u.pathname.startsWith('/api/'))return realFetch(url,o);
+  const method=(o.method||'GET').toUpperCase(),p=u.pathname.slice(4) || '/';
+  const out=(code,obj)=>new Response(JSON.stringify(obj),{status:code,headers:{'Content-Type':'application/json'}});
+  await new Promise(r=>setTimeout(r,60));
+  try{for(const r of R){const m=r.re.exec(p);if(!m||r.m!==method)continue;let user=null;
+    if(r.auth){const tok=((o.headers||{}).Authorization||'').replace(/^Bearer /,''),pl=verify(tok);user=pl&&db.users.find(x=>x.id===pl.uid);if(!user)throw new HttpError(401,'Please log in again')}
+    let body={};if(['POST','PUT','PATCH'].includes(method)&&o.body)body=JSON.parse(o.body);
+    return out(200,await r.h({req:{socket:{remoteAddress:'local'}},user,body,q:u.searchParams,p:m.groups||{}}))}
+    throw new HttpError(404,'Not found')}
+  catch(e){if(e instanceof HttpError)return out(e.code,{error:e.message});console.error(e);return out(500,{error:'Something went wrong'})}
+};
+})();
+</script>
+<script>'use strict';
+/* Explorify frontend - vanilla JS single-page app talking to the Node API (/api/*) */
+const TK = 'xp_token';
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const S = { user: null, dests: [], favs: [], trips: [], notifs: [], cur: 'splash', p: {}, hist: [], draft: null, cal: null, results: [], cat: 'All', busy: 0, rid: 0,
+  f: { q: '', cat: 'All', max: 5000, rating: 0, prefs: [], sort: 'popular' } };
+const RATE = { USD: ['$', 1], EUR: ['€', 0.92], INR: ['₹', 83] };
+const cur = () => RATE[S.user?.settings?.currency] || RATE.USD;
+const money = (n) => cur()[0] + Math.round(n * cur()[1]).toLocaleString();
+const dist = (k) => (S.user?.settings?.units === 'mi' ? Math.round(k * 0.621) + ' mi' : k + ' km');
+const ymd = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const addD = (s, n) => { const d = new Date(s + 'T00:00:00'); d.setDate(d.getDate() + n); return ymd(d); };
+const fmtD = (s) => new Date(s + 'T00:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' });
+const nights = (t) => Math.round((Date.parse(t.end) - Date.parse(t.start)) / 864e5) + 1;
+const D = (id) => S.dests.find((d) => d.id == id);
+const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const CATS = ['All', 'Beach', 'Mountain', 'City', 'Culture', 'Nature'];
+const PREFS = ['Culture', 'Food', 'Adventure', 'Nature', 'Nightlife', 'Relax'];
+const INTERESTS = ['Culture', 'Beach', 'Food', 'Adventure', 'Nature', 'Nightlife', 'Shopping', 'Wellness', 'Relax'];
+const val = (id) => ($(id)?.value || '').trim();
+const setErr = (id, m) => { const e = $('e_' + id); if (e) e.textContent = m || ''; };
+
+/* ---------- API + feedback ---------- */
+async function api(path, o = {}) {
+  const h = { 'Content-Type': 'application/json' }, t = localStorage.getItem(TK); if (t) h.Authorization = 'Bearer ' + t;
+  let r; try { r = await fetch('/api' + path, { method: o.method || 'GET', headers: h, body: o.body ? JSON.stringify(o.body) : undefined }); }
+  catch (e) { console.error('Explorify API request failed:', path, e); throw new Error(window.__EXPLORIFY_LOCAL_API__ ? 'Explorify local API could not start. Refresh this page; if it continues, open this updated file with VS Code Live Server.' : 'Cannot connect to the app. Open this HTML with VS Code Live Server and refresh.'); }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { if (r.status === 401 && t && S.user) { localLogout(); toast('Session expired. Please log in again.', 1); } throw new Error(j.error || 'Request failed'); }
+  return j;
+}
+function spin() { clearTimeout(S.sp); if (S.busy) S.sp = setTimeout(() => $('spin').classList.toggle('on', S.busy > 0), 250); else $('spin').classList.remove('on'); }
+async function run(fn, onErr) { S.busy++; spin(); try { await fn(); return true; } catch (e) { onErr ? onErr(e.message) : toast(e.message, 1); return false; } finally { S.busy--; spin(); } }
+function toast(m, bad) { document.querySelectorAll('.toast').forEach((t) => t.remove()); const t = document.createElement('div'); t.className = 'toast' + (bad ? ' bad' : ''); t.textContent = m; $('app').appendChild(t); setTimeout(() => t.remove(), 2800); }
+function closeOv() { const o = $('ov'); o.classList.add('out'); setTimeout(() => { o.innerHTML = ''; o.className = ''; }, 300); }
+function ov(html, k) { const o = $('ov'); o.className = ''; o.innerHTML = '<div class="scrim" onclick="closeOv()"></div><div class="' + k + '">' + html + '</div>'; if (k !== 'popup') drag(o.lastElementChild); }
+const sheet = (h) => ov('<i class="grab"></i>' + h, 'sheet');
+const side = (h) => ov(h, 'side');
+function popup(t, m, ok, fn, nocancel) {
+  window._pf = fn;
+  ov(`<div class="pc"><div class="pi">✦</div><h2>${esc(t)}</h2><p style="margin-top:6px">${esc(m)}</p><div class="row" style="margin-top:20px">${nocancel ? '' : '<span class="pill" style="flex:1;justify-content:center" onclick="closeOv()">Cancel</span>'}<span class="pill on" style="flex:1;justify-content:center" onclick="closeOv();window._pf&&window._pf()">${esc(ok)}</span></div></div>`, 'popup');
+}
+
+/* ---------- navigation ---------- */
+const PUBLIC = ['splash', 'onb', 'login', 'signup', 'forgot'];
+const LOAD = {
+  details: async (p) => { p.d = await api('/destinations/' + p.id); },
+  hotel: async (p) => { p.d = await api('/destinations/' + p.destId); },
+  trips: async () => { S.trips = await api('/trips'); },
+  itinerary: async (p) => { p.t = await api('/trips/' + p.id); }, overview: async (p) => { p.t = await api('/trips/' + p.id); p.d = await api('/destinations/' + p.t.destId); }, tracker: async (p) => { p.t = await api('/trips/' + p.id); },
+  notifications: async () => { S.notifs = await api('/notifications'); },
+  saved: async () => { S.favs = await api('/favorites'); },
+  help: async (p) => { p.tickets = await api('/support'); },
+};
+async function go(n, p = {}, replace) {
+  if (!S.user && !PUBLIC.includes(n)) { n = 'login'; p = {}; }
+  if (LOAD[n] && !(await run(() => LOAD[n](p)))) return;
+  if (!replace) S.hist.push({ cur: S.cur, p: S.p });
+  S.p = p; S.cur = n; render(1);
+}
+const root = (n, p) => { S.hist = []; return go(n, p, true); };
+async function back() {
+  const h = S.hist.pop(); if (!h) return root(S.user ? 'home' : 'login');
+  if (LOAD[h.cur] && !(await run(() => LOAD[h.cur](h.p)))) { S.hist.push(h); return; }
+  S.cur = h.cur; S.p = h.p; render(1, 'bk');
+}
+function render(anim, dir) {
+  const sc = !anim && document.querySelector('.body')?.scrollTop;
+  $('v').className = anim ? 'enter ' + (dir || 'fwd') : ''; $('v').innerHTML = V[S.cur]();
+  const b = document.querySelector('.body'); if (sc && b) b.scrollTop = sc;
+  applyPh(); setup(anim); if (anim && S.cur === 'search') doSearch(); if (AFTER[S.cur] && anim) AFTER[S.cur]();
+}
+let _io;
+function setup(anim) {
+  if (_io) _io.disconnect(); const rt = document.querySelector('.body'); if (!rt) return;
+  _io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('show'); _io.unobserve(e.target); } }), { root: rt, threshold: 0.08 });
+  rt.querySelectorAll('.card,.li,.glass:not(.tab),.sec,.map').forEach((el) => { el.classList.add('rv'); anim ? _io.observe(el) : el.classList.add('show'); });
+  bindScroll(rt);
+}
+function fit() { const a = $('app'); if (innerWidth > 520) a.style.transform = `scale(${Math.min(1, (innerHeight - 20) / 894, (innerWidth - 20) / 422)})`; else a.style.transform = ''; }
+
+/* ---------- shared UI pieces ---------- */
+const sb = () => `<div class="sb"><span>${new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M/i, '')}</span><span>▂▄▆ ᯤ ▭</span></div>`;
+const hdr = (t, r) => sb() + `<div class="row sp hd"><div class="ic" onclick="back()">‹</div><b>${esc(t)}</b>${r || '<div class="dot" style="visibility:hidden"></div>'}</div>`;
+const page = (title, body, o = {}) => `<div class="scr">${o.nohdr ? sb() : hdr(title, o.right)}<div class="body">${body}</div>${o.footer ? `<div class="foot">${o.footer}</div>` : ''}${o.tabs ? tabs() : ''}</div>`;
+function tabs() {
+  const L = [['home', '⌂', 'Home'], ['explore', '◎', 'Explore'], ['trips', '✈', 'Trips'], ['saved', '♡', 'Saved'], ['profile', '☺', 'Profile']];
+  return '<div class="tab glass">' + L.map((l) => `<div class="${S.cur === l[0] ? 'on' : ''}" onclick="root('${l[0]}')"><i>${l[1]}</i>${l[2]}</div>`).join('') + '</div>';
+}
+const btn = (label, fn, ic = '↗') => `<div class="btn" onclick="${fn}"><b>${ic}</b><span>${label}</span></div>`;
+const chips = (list, sel, fn) => `<div class="row" style="overflow-x:auto;scrollbar-width:none;padding:4px 0">${list.map((x) => `<span class="pill ${x === sel ? 'on' : ''}" onclick="${fn}('${x}')">${x}</span>`).join('')}</div>`;
+const empty = (ic, t, sub, act) => `<div class="empty"><b>${ic}</b><h3 style="color:#fff">${t}</h3><p style="margin:6px 0 16px">${sub || ''}</p>${act || ''}</div>`;
+const fld = (id, ph, o = {}) => `<div class="fld"><input class="in" id="${id}" type="${o.type || 'text'}" placeholder="${ph}" value="${esc(o.v || '')}" ${o.ro ? 'readonly' : ''} autocomplete="${o.ac || 'off'}" ${o.attr || ''}>${o.eye ? `<span class="eye" onclick="eye('${id}')">👁</span>` : ''}<div class="err" id="e_${id}"></div></div>`;
+const eye = (id) => { const i = $(id); i.type = i.type === 'password' ? 'text' : 'password'; };
+const heart = (id) => `<div class="ic sm" onclick="event.stopPropagation();fav(${id})">${S.favs.includes(id) ? '♥' : '♡'}</div>`;
+const card = (d, h = 250, w) => `<div class="card ${d.img}" data-ph="d${d.id}" style="min-height:${h}px;${w ? 'min-width:' + w + 'px' : ''}" onclick="go('details',{id:${d.id}})"><div class="row sp"><span class="tag">${esc(d.region)}</span>${heart(d.id)}</div><div><div class="t">${esc(d.name)}</div><p style="color:#fff;margin-top:6px">${esc(d.country)} · ★ ${d.rating} · ${money(d.priceMin)}+</p></div></div>`;
+const li = (d) => `<div class="glass row li" style="padding:10px;gap:14px;cursor:pointer" onclick="go('details',{id:${d.id}})"><div class="${d.img}" data-ph="d${d.id}" style="width:72px;height:72px;border-radius:20px;flex:none"></div><div style="flex:1"><h3>${esc(d.name)}</h3><p>${esc(d.region)}, ${esc(d.country)} · ★ ${d.rating}</p></div>${heart(d.id)}</div>`;
+const tripStatus = (t) => { const n = ymd(new Date()); return n < t.start ? 'Upcoming' : n <= t.end ? 'Ongoing' : 'Past'; };
+const spent = (t) => t.expenses.reduce((a, e) => a + e.amount, 0);
+const nextTrip = () => S.trips.filter((t) => tripStatus(t) !== 'Past').sort((a, b) => a.start.localeCompare(b.start))[0];
+function tripCard(t) {
+  const d = D(t.destId), st = tripStatus(t), pc = Math.min(100, (spent(t) / t.budget) * 100);
+  return `<div class="card ${d.img}" data-ph="d${d.id}" style="min-height:210px" onclick="go('overview',{id:${t.id}})"><div class="row sp"><span class="tag">${fmtD(t.start)} - ${fmtD(t.end)}</span><span class="tag">${st}</span></div><div><div class="t">${esc(t.name)}</div><p style="color:#fff;margin:4px 0 8px">${esc(d.name)} · ${t.travellers} traveller${t.travellers > 1 ? 's' : ''}</p><div class="bar"><i style="width:${pc}%"></i></div></div></div>`;
+}
+
+/* ---------- session ---------- */
+async function loadUser() { const [me, f, t, n] = await Promise.all([api('/me'), api('/favorites'), api('/trips'), api('/notifications')]); S.user = me; S.favs = f; S.trips = t; S.notifs = n; }
+async function startSession(res) { localStorage.setItem(TK, res.token); S.user = res.user; await loadUser(); await root('home'); }
+function localLogout() { localStorage.removeItem(TK); S.user = null; S.favs = []; S.trips = []; S.notifs = []; S.hist = []; S.cur = 'login'; S.p = {}; render(1); }
+async function start() {
+  if (!S.dests.length && !(await run(async () => { S.dests = await api('/destinations'); }))) return;
+  // Always follow the requested first-visit flow: logo -> 3 onboarding screens -> login -> home.
+  localStorage.removeItem(TK); S.user = null;
+  S.p = { i: 0 }; root('onb', { i: 0 });
+}
+function nextOnb() { const i = S.p.i; if (i < 2) { S.p = { i: i + 1 }; render(1); } else finishOnb(); }
+function finishOnb() { localStorage.setItem('xp_onb', '1'); go('login'); }
+
+async function doLogin() {
+  ['em', 'pw', 'f'].forEach((x) => setErr(x)); const id = val('em') || 'guest', pw = $('pw').value; // demo: any ID + any password opens the app
+  let res; if (await run(async () => { res = await api('/auth/login', { method: 'POST', body: { email: id, password: pw } }); }, (m) => setErr('f', m))) await startSession(res);
+}
+async function doSignup() {
+  ['nm', 'em', 'pw', 'pw2', 'f'].forEach((x) => setErr(x)); const name = val('nm'), email = val('em').toLowerCase(), pw = $('pw').value; let bad = 0;
+  if (name.length < 2) { setErr('nm', 'Enter your full name (min 2 characters)'); bad = 1; }
+  if (!EMAIL.test(email)) { setErr('em', 'Enter a valid email address'); bad = 1; }
+  if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/\d/.test(pw)) { setErr('pw', 'Min 8 characters with a letter and a number'); bad = 1; }
+  if (pw !== $('pw2').value) { setErr('pw2', 'Passwords do not match'); bad = 1; } if (bad) return;
+  let res; if (await run(async () => { res = await api('/auth/signup', { method: 'POST', body: { name, email, password: pw } }); }, (m) => setErr('f', m))) { toast('Account created ✓'); await startSession(res); }
+}
+async function doForgot() {
+  setErr('em'); setErr('f'); const email = val('em').toLowerCase(); if (!EMAIL.test(email)) return setErr('em', 'Enter a valid email address');
+  let res; if (await run(async () => { res = await api('/auth/forgot', { method: 'POST', body: { email } }); }, (m) => setErr('f', m))) { S.p = { step: 2, email, demo: res.demoCode }; render(1); }
+}
+async function doReset() {
+  ['cd', 'pw', 'f'].forEach((x) => setErr(x)); const code = val('cd'), pw = $('pw').value; let bad = 0;
+  if (!/^\d{6}$/.test(code)) { setErr('cd', 'Enter the 6-digit code'); bad = 1; }
+  if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/\d/.test(pw)) { setErr('pw', 'Min 8 characters with a letter and a number'); bad = 1; } if (bad) return;
+  if (await run(async () => { await api('/auth/reset', { method: 'POST', body: { email: S.p.email, code, password: pw } }); }, (m) => setErr('f', m))) { toast('Password updated. Please log in.'); root('login'); }
+}
+function logout() { popup('Log out?', 'You can log back in any time.', 'Log out', () => { localLogout(); toast('Logged out'); }); }
+
+/* ---------- favourites, search, filters ---------- */
+async function fav(id) {
+  const on = S.favs.includes(id);
+  if (await run(async () => { await api('/favorites/' + id, { method: on ? 'DELETE' : 'PUT' }); })) { S.favs = on ? S.favs.filter((x) => x !== id) : [...S.favs, id]; toast(on ? 'Removed from saved' : 'Saved to favourites ♥'); S.cur === 'search' ? drawResults() : render(); }
+}
+const setCat = (c) => { S.cat = c; render(); };
+function goSearch(id) { S.f.q = val(id); go('search'); }
+const nF = () => (S.f.cat !== 'All') + (S.f.max < 5000) + (S.f.rating > 0) + S.f.prefs.length + (S.f.sort !== 'popular');
+let _deb; const deb = () => { clearTimeout(_deb); _deb = setTimeout(doSearch, 300); };
+async function doSearch() {
+  const rid = ++S.rid, f = S.f, qs = new URLSearchParams({ q: f.q, category: f.cat, maxBudget: f.max < 5000 ? f.max : '', minRating: f.rating || '', prefs: f.prefs.join(','), sort: f.sort });
+  [...qs.keys()].forEach((k) => !qs.get(k) && qs.delete(k)); const r = $('res'); if (r) r.innerHTML = '<div class="glass li"><div class="sk" style="width:60%"></div><div class="sk" style="width:35%;margin-top:10px"></div></div>';
+  try { const data = await api('/destinations?' + qs); if (rid !== S.rid) return; S.results = data; drawResults(); }
+  catch (e) { if (r && rid === S.rid) r.innerHTML = empty('⚠', 'Search failed', esc(e.message), '<span class="pill on" onclick="doSearch()">Retry</span>'); }
+}
+function drawResults() {
+  const r = $('res'); if (!r) return; $('cnt').textContent = S.results.length + ' result' + (S.results.length === 1 ? '' : 's');
+  r.innerHTML = S.results.length ? S.results.map(li).join('') : empty('🔍', 'No matches', 'Try a different name or clear your filters.', '<span class="pill on" onclick="clearF()">Clear filters</span>');
+}
+function clearF() { S.f = { q: '', cat: 'All', max: 5000, rating: 0, prefs: [], sort: 'popular' }; render(); doSearch(); }
+function filterSheet() {
+  S.tf = JSON.parse(JSON.stringify(S.f)); const t = S.tf, P = (arr, k, cur, multi) => arr.map((x) => { const v = typeof x === 'number' ? x : `'${x}'`; return `<span class="pill ${multi ? (cur.includes(x) ? 'on' : '') : cur === x ? 'on' : ''}" onclick="pick(this,'${k}',${v},${multi ? 1 : 0})">${x === 0 ? 'Any' : x}</span>`; }).join('');
+  sheet(`<h2 style="margin-bottom:12px">Filters</h2><p>Category</p><div class="row" style="flex-wrap:wrap;margin:8px 0 12px">${P(CATS, 'cat', t.cat)}</div>
+  <p>Max budget: <b id="bl" style="color:#fff">${t.max >= 5000 ? 'Any' : money(t.max)}</b></p><input type="range" min="300" max="5000" step="100" value="${t.max}" oninput="S.tf.max=+this.value;$('bl').textContent=this.value>=5000?'Any':money(+this.value)">
+  <p style="margin-top:10px">Minimum rating</p><div class="row" style="flex-wrap:wrap;margin:8px 0 12px">${P([0, 4, 4.5, 4.8], 'rating', t.rating)}</div>
+  <p>Travel preferences</p><div class="row" style="flex-wrap:wrap;margin:8px 0 12px">${P(PREFS, 'prefs', t.prefs, 1)}</div>
+  <p>Sort by</p><div class="row" style="flex-wrap:wrap;margin:8px 0 16px">${['popular', 'price', 'nearest'].map((x) => `<span class="pill ${t.sort === x ? 'on' : ''}" onclick="pick(this,'sort','${x}',0)">${x[0].toUpperCase() + x.slice(1)}</span>`).join('')}</div>
+  <div class="row"><span class="pill" style="flex:1;justify-content:center" onclick="closeOv();clearF()">Reset</span><span class="pill on" style="flex:2;justify-content:center" onclick="applyF()">Apply filters</span></div>`);
+}
+function pick(el, k, v, multi) {
+  if (multi) { const a = S.tf[k], i = a.indexOf(v); i < 0 ? a.push(v) : a.splice(i, 1); el.classList.toggle('on'); }
+  else { S.tf[k] = v; el.parentNode.querySelectorAll('.pill').forEach((p) => p.classList.remove('on')); el.classList.add('on'); }
+}
+function applyF() { S.f = S.tf; closeOv(); render(); doSearch(); toast('Filters applied'); }
+
+/* ---------- overlays: notifications / menu ---------- */
+function menu() {
+  const items = [['home', '⌂', 'Home'], ['explore', '◎', 'Explore'], ['trips', '✈', 'My Trips'], ['saved', '♡', 'Saved'], ['notifications', '🔔', 'Notifications'], ['settings', '⚙', 'Settings'], ['help', '？', 'Help & Support']];
+  side(`<div class="row sp" style="margin:16px 0 18px"><h2>Menu</h2><div class="ic" onclick="closeOv()">✕</div></div><div class="col">${items.map((m) => `<div class="glass li row" style="gap:14px;cursor:pointer" onclick="closeOv();${['home', 'explore', 'trips', 'saved'].includes(m[0]) ? `root('${m[0]}')` : `go('${m[0]}')`}"><span style="font-size:20px">${m[1]}</span><h3>${m[2]}</h3></div>`).join('')}<div class="glass li row" style="gap:14px;cursor:pointer" onclick="closeOv();logout()"><span style="font-size:20px">⏻</span><h3>Log out</h3></div></div>`);
+}
+
+/* ---------- trip creation flow ---------- */
+function newTrip(destId) {
+  const n = new Date(); S.cal = { y: n.getFullYear(), m: n.getMonth() };
+  S.draft = { mode: 'new', destId: destId || null, name: destId ? D(destId).name + ' Getaway' : '', start: null, end: null, travellers: 2, budget: 1500, interests: [] }; go('create');
+}
+function editTrip(id) {
+  const t = S.trips.find((x) => x.id === id), d = new Date(t.start + 'T00:00:00'); S.cal = { y: d.getFullYear(), m: d.getMonth() };
+  S.draft = { mode: 'edit', id, destId: t.destId, name: t.name, start: t.start, end: t.end, travellers: t.travellers, budget: t.budget, interests: [...t.interests] }; go('create');
+}
+function drawDL() {
+  const l = $('dl'); if (!l) return; const q = val('ds').toLowerCase();
+  const list = S.dests.filter((d) => !q || (d.name + d.country + d.region).toLowerCase().includes(q));
+  l.innerHTML = list.map((d) => `<div class="glass row li ${S.draft.destId === d.id ? 'sel-item' : ''}" style="padding:10px;gap:14px;cursor:pointer" onclick="selDest(${d.id})"><div class="${d.img}" data-ph="d${d.id}" style="width:52px;height:52px;border-radius:16px;flex:none"></div><div style="flex:1"><h3>${esc(d.name)}</h3><p>${esc(d.country)}</p></div>${S.draft.destId === d.id ? '<b>✓</b>' : ''}</div>`).join('') || '<p class="m">No destinations match.</p>';
+}
+function selDest(id) {
+  const d = S.draft, old = d.destId && D(d.destId); d.destId = id; setErr('dest');
+  if (!d.name || (old && d.name === old.name + ' Getaway')) { d.name = D(id).name + ' Getaway'; $('tn').value = d.name; } drawDL();
+}
+function step1() {
+  const d = S.draft; d.name = val('tn'); setErr('dest'); setErr('tn');
+  if (!d.destId) return setErr('dest', 'Please choose a destination');
+  if (d.name.length < 2 || d.name.length > 60) return setErr('tn', 'Trip name must be 2-60 characters'); go('dates');
+}
+function calHtml() {
+  const c = S.cal, d = S.draft, first = new Date(c.y, c.m, 1), off = (first.getDay() + 6) % 7, dim = new Date(c.y, c.m + 1, 0).getDate(), t = ymd(new Date()), now = new Date();
+  let cells = '<span></span>'.repeat(off);
+  for (let n = 1; n <= dim; n++) { const ds = ymd(new Date(c.y, c.m, n)), dis = ds < t, st = ds === d.start || ds === d.end, mid = d.start && d.end && ds > d.start && ds < d.end; cells += `<button class="dy${dis ? ' dis' : ''}${st ? ' sel' : ''}${mid ? ' mid' : ''}" ${dis ? 'disabled' : ''} onclick="pickDay('${ds}')">${n}</button>`; }
+  const atMin = c.y === now.getFullYear() && c.m === now.getMonth();
+  return `<div class="glass cal"><div class="row sp" style="margin-bottom:10px"><div class="ic sm" style="${atMin ? 'opacity:.3;pointer-events:none' : ''}" onclick="calNav(-1)">‹</div><h3>${first.toLocaleDateString('en', { month: 'long', year: 'numeric' })}</h3><div class="ic sm" onclick="calNav(1)">›</div></div><div class="cg">${['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((x) => `<span class="w">${x}</span>`).join('')}${cells}</div></div>`;
+}
+function calNav(n) { const c = S.cal, d = new Date(c.y, c.m + n, 1), now = new Date(); if (d < new Date(now.getFullYear(), now.getMonth(), 1) || d > new Date(now.getFullYear(), now.getMonth() + 18, 1)) return; S.cal = { y: d.getFullYear(), m: d.getMonth() }; render(); }
+function pickDay(ds) { const d = S.draft; setErr('dt'); if (!d.start || d.end || ds < d.start) { d.start = ds; d.end = null; } else d.end = ds; render(); }
+const trv = (n) => { S.draft.travellers = Math.min(20, Math.max(1, S.draft.travellers + n)); render(); };
+function step2() {
+  const d = S.draft; if (!d.start || !d.end) return setErr('dt', 'Please select both a start and an end date');
+  if (d.start < ymd(new Date()) && d.mode === 'new') return setErr('dt', 'Start date cannot be in the past'); if (nights(d) > 30) return setErr('dt', 'Trips can be at most 30 days'); go('budget');
+}
+const bud = (n) => { S.draft.budget = Math.min(10000, Math.max(100, S.draft.budget + n)); render(); };
+function togInt(el, x) { const a = S.draft.interests, i = a.indexOf(x); i < 0 ? a.push(x) : a.splice(i, 1); el.classList.toggle('on'); }
+async function submitTrip() {
+  const d = S.draft, body = { destId: d.destId, name: d.name, start: d.start, end: d.end, travellers: d.travellers, budget: d.budget, interests: d.interests };
+  if (!(d.budget >= 100)) return setErr('bd', 'Budget must be at least 100');
+  if (d.mode === 'edit') {
+    if (await run(async () => { await api('/trips/' + d.id, { method: 'PUT', body }); S.trips = await api('/trips'); }, (m) => setErr('bd', m))) { toast('Trip updated ✓'); S.hist = [{ cur: 'trips', p: {} }]; go('overview', { id: d.id }, true); }
+    return;
+  }
+  await go('planner'); let t, err; const task = api('/trips', { method: 'POST', body }).then((r) => { t = r; }).catch((e) => { err = e.message; });
+  await Promise.all([task, delay(2200)]);
+  if (err) { toast(err, 1); return back(); }
+  try { S.trips = await api('/trips'); S.notifs = await api('/notifications'); } catch {}
+  S.hist = [{ cur: 'home', p: {} }]; await go('itinerary', { id: t.id }, true); toast('Itinerary ready ✦');
+}
+
+/* ---------- itinerary editing ---------- */
+const toggleEdit = () => { S.p.edit = !S.p.edit; render(); };
+async function saveItin() { await run(async () => { S.p.t = await api('/trips/' + S.p.t.id, { method: 'PUT', body: { itinerary: S.p.t.itinerary } }); }); }
+function upd(di, ii, k, v) { v = v.trim(); const it = S.p.t.itinerary[di].items[ii]; if (k === 'title' && (!v || v.length > 120)) { toast('Activity title must be 1-120 characters', 1); return render(); } if (k === 'time' && (!v || v.length > 10)) { toast('Enter a time like 09:00', 1); return render(); } it[k] = v; saveItin(); }
+async function mut(fn) { fn(S.p.t.itinerary); await saveItin(); render(); }
+const delAct = (di, ii) => mut((it) => it[di].items.splice(ii, 1));
+const addAct = (di) => mut((it) => it[di].items.push({ time: '12:00', title: 'New activity', note: 'Added by you' }));
+const mvAct = (di, ii, n) => mut((it) => { const a = it[di].items, j = ii + n; if (j < 0 || j >= a.length) return; [a[ii], a[j]] = [a[j], a[ii]]; });
+const delDay = (di) => popup('Delete this day?', 'All activities on this day will be removed.', 'Delete', () => mut((it) => it.splice(di, 1)));
+const addDay = () => { if (S.p.t.itinerary.length >= 30) return toast('Maximum 30 days', 1); mut((it) => it.push({ theme: 'Free day', items: [] })); };
+function regen() { popup('Regenerate itinerary?', 'This replaces your current plan with a fresh one based on your interests.', 'Regenerate', async () => { if (await run(async () => { S.p.t = await api(`/trips/${S.p.t.id}/plan`, { method: 'POST' }); })) { render(); toast('New itinerary created ✦'); } }); }
+
+/* ---------- trips, hotel, expenses ---------- */
+const setTab = (x) => { S.p = { ...S.p, tab: x }; render(); };
+function delTrip(id) {
+  popup('Delete this trip?', 'The itinerary and expenses will be permanently removed.', 'Delete', async () => {
+    if (await run(async () => { await api('/trips/' + id, { method: 'DELETE' }); S.trips = await api('/trips'); S.notifs = await api('/notifications'); })) { toast('Trip deleted'); S.cur === 'trips' ? render() : root('trips'); }
+  });
+}
+async function chooseHotel(tid, hid) { if (await run(async () => { await api('/trips/' + tid, { method: 'PUT', body: { hotelId: hid } }); })) { toast('Hotel added to your trip ✓'); back(); } }
+async function addExp() {
+  ['xt', 'xa', 'xf'].forEach((x) => setErr(x)); const title = val('xt'), amt = parseFloat($('xa').value); let bad = 0;
+  if (!title || title.length > 60) { setErr('xt', 'Enter a title (max 60 characters)'); bad = 1; } if (!(amt > 0)) { setErr('xa', 'Enter an amount greater than 0'); bad = 1; } if (bad) return;
+  if (await run(async () => { S.p.t = await api(`/trips/${S.p.t.id}/expenses`, { method: 'POST', body: { title, category: $('xc').value, amount: amt / cur()[1] } }); }, (m) => setErr('xf', m))) { toast('Expense added ✓'); render(); }
+}
+async function delExp(id) { if (await run(async () => { S.p.t = await api(`/trips/${S.p.t.id}/expenses/${id}`, { method: 'DELETE' }); })) { toast('Expense removed'); render(); } }
+
+/* ---------- profile, notifications, settings, help ---------- */
+async function saveProfile() {
+  ['nm', 'ph', 'f'].forEach((x) => setErr(x)); const name = val('nm'), phone = val('ph'); let bad = 0;
+  if (name.length < 2) { setErr('nm', 'Name must be at least 2 characters'); bad = 1; } if (phone && !/^[0-9+()\-\s]{6,20}$/.test(phone)) { setErr('ph', 'Enter a valid phone number'); bad = 1; } if (bad) return;
+  if (await run(async () => { S.user = await api('/me', { method: 'PUT', body: { name, phone, city: val('ct'), bio: val('bi') } }); }, (m) => setErr('f', m))) { toast('Profile saved ✓'); back(); }
+}
+async function markRead(id) { const n = S.notifs.find((x) => x.id === id); if (!n || n.read) return; n.read = true; render(); try { await api('/notifications/read', { method: 'POST', body: { id } }); } catch (e) { n.read = false; render(); toast(e.message, 1); } }
+async function markAll() { if (await run(async () => { await api('/notifications/read', { method: 'POST', body: { all: true } }); })) { S.notifs.forEach((n) => (n.read = true)); render(); toast('All caught up ✓'); } }
+async function delNotif(id) { if (await run(async () => { await api('/notifications/' + id, { method: 'DELETE' }); })) { S.notifs = S.notifs.filter((n) => n.id !== id); render(); } }
+async function setSet(k, v) { if (await run(async () => { S.user = await api('/me/settings', { method: 'PUT', body: { [k]: v } }); })) { render(); toast('Settings saved'); } }
+function pwSheet() {
+  sheet(`<h2 style="margin-bottom:14px">Change password</h2>${fld('cpw', 'Current password', { type: 'password', ac: 'current-password' })}${fld('npw', 'New password (min 8, letter + number)', { type: 'password', ac: 'new-password' })}${fld('npw2', 'Confirm new password', { type: 'password', ac: 'new-password' })}<div class="err form" id="e_f"></div><div class="btn" onclick="changePw()"><b>✓</b><span>Update password</span></div>`);
+}
+async function changePw() {
+  ['cpw', 'npw', 'npw2', 'f'].forEach((x) => setErr(x)); const c = $('cpw').value, n = $('npw').value; let bad = 0;
+  if (!c) { setErr('cpw', 'Enter your current password'); bad = 1; } if (n.length < 8 || !/[A-Za-z]/.test(n) || !/\d/.test(n)) { setErr('npw', 'Min 8 characters with a letter and a number'); bad = 1; } if (n !== $('npw2').value) { setErr('npw2', 'Passwords do not match'); bad = 1; } if (bad) return;
+  if (await run(async () => { await api('/me/password', { method: 'POST', body: { current: c, password: n } }); }, (m) => setErr('f', m))) { closeOv(); toast('Password updated ✓'); }
+}
+const clearSaved = () => popup('Clear saved destinations?', 'All your favourites will be removed.', 'Clear', async () => { if (await run(async () => { await api('/favorites', { method: 'DELETE' }); })) { S.favs = []; toast('Saved destinations cleared'); } });
+const delAccount = () => popup('Delete your account?', 'This permanently deletes your profile, trips and saved items. This cannot be undone.', 'Delete forever', async () => { if (await run(async () => { await api('/me', { method: 'DELETE' }); })) { localLogout(); toast('Account deleted'); } });
+const toggleFaq = (el) => el.classList.toggle('open');
+async function sendTicket() {
+  ['sj', 'sm', 'f'].forEach((x) => setErr(x)); const subject = val('sj'), message = val('sm'); let bad = 0;
+  if (subject.length < 3) { setErr('sj', 'Subject must be at least 3 characters'); bad = 1; } if (message.length < 10) { setErr('sm', 'Please describe the issue (min 10 characters)'); bad = 1; } if (bad) return;
+  if (await run(async () => { await api('/support', { method: 'POST', body: { subject, message } }); S.p.tickets = await api('/support'); S.notifs = await api('/notifications'); }, (m) => setErr('f', m))) { toast('Message sent ✓ We will reply soon'); render(); }
+}
+const FAQ = [['How does the AI trip planner work?', 'It builds a day-by-day plan from the activities that match your interests, then you can edit, reorder or regenerate it.'], ['Can I change my trip dates?', 'Yes. Open the trip, tap Edit Trip, pick new dates and save. The itinerary adjusts automatically.'], ['How do I save a destination?', 'Tap the heart on any destination card. Find them later under the Saved tab.'], ['How do I reset my password?', 'On the login screen tap "Forgot password?" and follow the steps.'], ['Which currencies are supported?', 'USD, EUR and INR. Change it under Settings. Prices use fixed demo exchange rates.']];
+
+/* ---------- screens ---------- */
+const OB = [['Discover places you\'ll love', 'Browse curated destinations from tropical lakes to alpine peaks.', 'i2'], ['Plan with your AI companion', 'Tell us your budget and interests, we build the perfect itinerary.', 'i1'], ['Travel stress free', 'Manage hotels, maps and budget in one place.', 'i4']];
+const AFTER = { create: () => drawDL() };
+const V = {
+  splash: () => `<div class="scr logo-screen splash-premium" style="justify-content:space-between;align-items:center;text-align:center;padding:30px 22px 28px"><div class="splash-top"><span class="splash-mini">✦ YOUR WORLD, OPENED</span></div><div class="logo-stage"><div class="logo-orbit orbit-one"></div><div class="logo-orbit orbit-two"></div><div class="logo-mark">E</div><div class="logo-spark spark-one">✦</div><div class="logo-spark spark-two">✧</div><span class="logo-ring-dot"></span></div><div class="splash-copy"><div class="brand logo-word">Explorify<span class="logo-dot">.</span></div><p>Your next adventure awaits.</p><div class="splash-rule"><i></i><span>EXPLORE · PLAN · EXPERIENCE</span><i></i></div>${btn('Start Journey', 'start()')}</div></div>`,
+  onb: () => { const i = S.p.i, o = OB[i]; return `<div class="scr onb"><div class="onb-photo ${o[2]}" data-ph="ob${i}"></div><div class="onb-shade"></div><div class="onb-top"><span class="pill" style="background:rgba(255,255,255,.17);backdrop-filter:blur(16px);pointer-events:none">Explorify</span><span class="tag" style="background:rgba(255,255,255,.18);backdrop-filter:blur(14px)">${i + 1} / 3</span></div><div class="onb-bottom"><div class="dots">${OB.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div><h1>${o[0]}</h1><p>${o[1]}</p>${btn(i < 2 ? 'Next' : 'Continue', 'nextOnb()')}</div></div>`; },
+  login: () => `<div class="scr login-premium" style="padding-bottom:22px"><div class="login-art"><div class="login-art-glow"></div><div class="login-brand-mark"><span>E</span><i></i></div><div class="login-brand-name">Explorify<span>.</span></div><p>Your next adventure awaits</p></div><div class="login-panel"><div class="login-tabs"><span class="active">Log in</span><span onclick="go('signup')">Sign up</span></div><h1>Welcome <span>back</span></h1><p class="login-sub">Sign in to continue your journey.</p>${fld('em', 'Email or any ID', { ac: 'username', attr: `onkeydown="if(event.key==='Enter')doLogin()"` })}${fld('pw', 'Password (anything)', { type: 'password', eye: 1, ac: 'current-password', attr: `onkeydown="if(event.key==='Enter')doLogin()"` })}<p class="login-forgot" onclick="go('forgot')">Forgot password?</p><div class="err form" id="e_f"></div>${btn('Log In', 'doLogin()')}<div class="login-divider"><span></span>or continue with<span></span></div><div class="login-social"><button type="button" onclick="toast('Social login is a demo feature')">G</button><button type="button" onclick="toast('Social login is a demo feature')">●</button></div><p class="login-terms">By continuing, you agree to our Terms of Service and Privacy Policy.</p></div></div>`,
+  signup: () => `<div class="scr" style="padding-bottom:24px">${sb()}<div class="body" style="display:flex;flex-direction:column;justify-content:center;padding-bottom:10px"><h1>Create <span>account</span></h1><p style="margin:10px 0 20px">Start planning smarter trips.</p>${fld('nm', 'Full name', { ac: 'name' })}${fld('em', 'Email', { type: 'email', ac: 'email' })}${fld('pw', 'Password', { type: 'password', eye: 1, ac: 'new-password' })}${fld('pw2', 'Confirm password', { type: 'password', ac: 'new-password', attr: `onkeydown="if(event.key==='Enter')doSignup()"` })}<div class="err form" id="e_f"></div>${btn('Sign Up', 'doSignup()')}</div><p style="text-align:center">Have an account? <b style="color:var(--gold);cursor:pointer" onclick="back()">Log in</b></p></div>`,
+  forgot: () => { const two = S.p.step === 2; return `<div class="scr" style="padding-bottom:24px">${hdr('Forgot Password')}<div class="body" style="padding-top:14px"><h1 style="font-size:30px">${two ? 'Enter your <span>code</span>' : 'Reset your <span>password</span>'}</h1><p style="margin:10px 0 20px">${two ? `We generated a 6-digit code for ${esc(S.p.email)}.` : 'Enter the email you signed up with.'}</p>${two ? `${S.p.demo ? `<div class="glass li" style="margin-bottom:14px"><p>Demo mode: no email service is configured, so your code is shown here.</p><h2 style="letter-spacing:6px;margin-top:6px">${S.p.demo}</h2></div>` : '<p class="m" style="margin-bottom:14px">If the email is registered, enter the code you received.</p>'}${fld('cd', '6-digit code', { attr: 'maxlength="6" inputmode="numeric"' })}${fld('pw', 'New password', { type: 'password', eye: 1, ac: 'new-password' })}` : fld('em', 'Email', { type: 'email', ac: 'email', v: S.p.email, attr: `onkeydown="if(event.key==='Enter')doForgot()"` })}<div class="err form" id="e_f"></div>${btn(two ? 'Reset Password' : 'Send Reset Code', two ? 'doReset()' : 'doForgot()')}</div></div>`; },
+  home: () => {
+    const u = S.user, up = nextTrip(), list = S.cat === 'All' ? S.dests : S.dests.filter((d) => d.category === S.cat), un = S.notifs.filter((n) => !n.read).length;
+    return page('', `<div class="row sp"><span class="pill" onclick="root('profile')"><span class="av sm">${esc(u.name[0].toUpperCase())}</span>Hello, ${esc(u.name.split(' ')[0])}</span><span class="row"><div class="ic rel" onclick="go('notifications')">🔔${un ? `<i class="badge">${un}</i>` : ''}</div><div class="ic" onclick="menu()">☰</div></span></div><h1 class="hh">Smarter Trips<br><span>Start Here</span></h1><div class="pill srch"><input id="hq" class="bare" placeholder="Ask me about trips..." value="${esc(S.f.q)}" onkeydown="if(event.key==='Enter')goSearch('hq')"><div class="av" style="width:40px;height:40px" onclick="goSearch('hq')">➤</div></div>${up ? `<div class="sec row sp"><h2>Your next trip</h2><span class="m" style="cursor:pointer" onclick="root('trips')">See all</span></div>${tripCard(up)}<div style="height:16px"></div>` : ''}${chips(CATS, S.cat, 'setCat')}<div class="col" style="margin-top:12px">${list.map((d) => card(d)).join('') || empty('🧭', 'Nothing here yet', 'No destinations in this category.')}</div>`, { nohdr: 1, tabs: 1 });
+  },
+  explore: () => { const list = S.dests.filter((d) => S.cat === 'All' || d.category === S.cat); return page('', `<h1 style="font-size:30px;margin:14px 0">Explore <span>Destinations</span></h1><div class="row" style="margin-bottom:6px"><div class="pill srch" style="margin:0;flex:1"><input id="eq" class="bare" placeholder="Search destinations" value="${esc(S.f.q)}" onkeydown="if(event.key==='Enter')goSearch('eq')"></div><div class="ic" style="width:54px;height:54px" onclick="goSearch('eq')">⚙</div></div>${chips(CATS, S.cat, 'setCat')}<div class="sec row sp"><h2>Popular</h2></div><div class="row" style="overflow-x:auto;scrollbar-width:none;gap:14px;align-items:stretch">${list.slice().sort((a, b) => b.rating - a.rating).slice(0, 5).map((d) => card(d, 230, 220)).join('')}</div><div class="sec"><h2>Nearby picks</h2></div>${list.slice().sort((a, b) => a.distanceKm - b.distanceKm).slice(0, 5).map(li).join('<div style="height:12px"></div>') || empty('🧭', 'No destinations', 'Pick another category.')}`, { nohdr: 1, tabs: 1 }); },
+  search: () => page('Search & Filters', `<div class="pill srch" style="margin-bottom:12px"><input id="sq" class="bare" placeholder="Where to?" value="${esc(S.f.q)}" oninput="S.f.q=this.value;deb()" autocomplete="off"><span class="m" style="cursor:pointer;padding:6px" onclick="S.f.q='';$('sq').value='';doSearch()">✕</span></div><div class="row sp" style="margin-bottom:12px"><p id="cnt">Searching…</p>${nF() ? '<span class="pill" onclick="clearF()">Clear filters</span>' : ''}</div><div id="res" class="col"></div>`, { right: `<div class="ic rel" onclick="filterSheet()">⚙${nF() ? `<i class="badge">${nF()}</i>` : ''}</div>` }),
+  details: () => {
+    const d = S.p.d; return page('Details', `<div class="card ${d.img}" data-ph="d${d.id}" style="min-height:230px;cursor:default;margin-bottom:6px"><span class="tag" style="align-self:flex-start">★ ${d.rating} / 5.0</span></div><p style="font-size:11px;margin:0 4px 14px;min-height:14px">${credit('d' + d.id)}</p><h1 style="font-size:30px">${esc(d.name)},<br><span>${esc(d.country)}</span></h1><div class="row sp" style="margin:16px 0;align-items:flex-start;gap:14px"><div><h3>${money(d.priceMin)} - ${money(d.priceMax)}</h3><p>Includes flights, hotel & local activities</p></div><p style="max-width:140px;text-align:right">${esc(d.desc)}</p></div><div class="glass" style="padding:20px"><h2 style="text-transform:uppercase;line-height:1.25">${esc(d.region)}<br>${esc(d.country)}</h2><div class="row sp" style="margin:16px 0"><span class="row"><div class="dot">🗺</div><h2>${dist(d.distanceKm)}</h2></span><span class="row"><span style="color:var(--gold)">★</span><span>${d.rating} / 5.0 rating</span></span></div><div class="row" style="flex-wrap:wrap;gap:8px">${d.tags.map((x) => `<span class="tag">${x}</span>`).join('')}</div></div><div class="sec"><h2>Hotels</h2></div>${d.hotels.map((h) => `<div class="glass row li" style="padding:12px;gap:14px;cursor:pointer;margin-bottom:12px" onclick="go('hotel',{destId:${d.id},hotelId:${h.id},tripId:${S.p.tripId || 0}})"><div class="${d.img}" data-ph="d${d.id}" style="width:60px;height:60px;border-radius:18px;flex:none"></div><div style="flex:1"><h3>${esc(h.name)}</h3><p>${money(h.pricePerNight)} / night · ★ ${h.rating}</p></div><span>›</span></div>`).join('')}<div class="sec"><h2>Top activities</h2></div>${d.activities.map((a) => `<div class="glass li row" style="gap:12px;margin-bottom:10px"><span class="tag">${a.tag}</span><p style="color:#fff">${esc(a.title)}</p></div>`).join('')}`, { right: heart(d.id), footer: btn('Start My Trip', `newTrip(${d.id})`, '⚬⚬') });
+  },
+  hotel: () => {
+    const { d, hotelId, tripId } = S.p, h = d.hotels.find((x) => x.id == hotelId), t = tripId && S.trips.find((x) => x.id == tripId), sel = t && t.hotelId === h.id;
+    return page('Hotel Details', `<div class="card ${d.img}" data-ph="d${d.id}" style="min-height:210px;cursor:default;margin-bottom:16px"><span class="tag" style="align-self:flex-start">★ ${h.rating}</span></div><h1 style="font-size:28px">${esc(h.name)}</h1><p style="margin:10px 0 14px">${esc(h.desc)}</p><div class="row" style="flex-wrap:wrap;gap:8px">${h.amenities.map((x) => `<span class="tag">${x}</span>`).join('')}</div><div class="glass li" style="margin-top:16px"><h3>${money(h.pricePerNight)} / night</h3><p>${t ? `${nights(t)} nights · ${money(h.pricePerNight * nights(t))} total` : `${esc(d.region)}, ${esc(d.country)}`}</p></div>`, { footer: t ? btn(sel ? 'Selected for your trip ✓' : 'Use for my trip', `chooseHotel(${t.id},${h.id})`, '✓') : btn('Plan a trip here', `newTrip(${d.id})`, '✈') });
+  },
+  saved: () => { const l = S.favs.map(D).filter(Boolean); return page('', `<h1 style="font-size:30px;margin:14px 0">Saved <span>Destinations</span></h1>${l.length ? `<div class="col">${l.map((d) => card(d, 200)).join('')}</div>` : empty('♡', 'Nothing saved yet', 'Tap the heart on any destination to save it here.', '<span class="pill on" onclick="root(\'explore\')">Explore destinations</span>')}`, { nohdr: 1, tabs: 1 }); },
+  create: () => { const d = S.draft; return page(d.mode === 'edit' ? 'Edit Trip' : 'Create Trip', `<h1 style="font-size:28px;margin-bottom:14px">Where are you <span>headed?</span></h1><div class="pill srch" style="margin-bottom:12px"><input id="ds" class="bare" placeholder="Search destinations" oninput="drawDL()"></div><div class="col" id="dl"></div><div class="err" id="e_dest"></div><div style="height:14px"></div>${fld('tn', 'Trip name', { v: d.name, attr: 'maxlength="60"' })}<p class="m">Step 1 of 3</p><div class="bar" style="margin-top:8px"><i style="width:33%"></i></div>`, { footer: btn('Continue', 'step1()') }); },
+  dates: () => { const d = S.draft; return page('Dates & Travellers', `${calHtml()}<div class="glass row sp" style="padding:16px 20px;margin-top:14px"><div><h3>Travellers</h3><p>Adults</p></div><span class="row"><div class="ic" onclick="trv(-1)">−</div><h2 style="min-width:24px;text-align:center">${d.travellers}</h2><div class="ic" onclick="trv(1)">+</div></span></div><div class="err form" id="e_dt" style="margin-top:10px"></div><p class="m" style="margin:10px 0 8px">${d.start && d.end ? `${fmtD(d.start)} - ${fmtD(d.end)} · ${nights(d)} day${nights(d) > 1 ? 's' : ''}` : d.start ? 'Now pick your end date' : 'Select a start date, then an end date'}</p><div class="bar"><i style="width:66%"></i></div>`, { footer: btn('Continue', 'step2()') }); },
+  budget: () => { const d = S.draft; return page('Budget & Interests', `<h1 style="font-size:28px;margin-bottom:14px">Set your <span>budget</span></h1><div class="glass" style="padding:20px"><div class="row sp"><div class="ic" onclick="bud(-100)">−</div><h1 id="bv" style="font-size:34px">${money(d.budget)}</h1><div class="ic" onclick="bud(100)">+</div></div><input type="range" min="100" max="10000" step="100" value="${d.budget}" style="margin-top:14px" oninput="S.draft.budget=+this.value;$('bv').textContent=money(+this.value)"></div><div class="sec"><h2>Interests</h2></div><div class="row" style="flex-wrap:wrap">${INTERESTS.map((x) => `<span class="pill ${d.interests.includes(x) ? 'on' : ''}" onclick="togInt(this,'${x}')">${x}</span>`).join('')}</div><div class="err form" id="e_bd"></div><p class="m" style="margin:8px 0">Step 3 of 3</p><div class="bar"><i style="width:100%"></i></div>`, { footer: btn(d.mode === 'edit' ? 'Save changes' : 'Generate with AI', 'submitTrip()', d.mode === 'edit' ? '✓' : '✦') }); },
+  planner: () => page('AI Trip Planner', `<div class="col" style="align-items:center;text-align:center;justify-content:center;min-height:560px"><div class="av" style="width:96px;height:96px;font-size:36px">✦</div><h1 style="font-size:28px">Crafting your <span>perfect trip</span></h1><p>Using ${S.draft.interests.length || 'your'} interests, ${money(S.draft.budget)} budget and ${S.draft.travellers} traveller${S.draft.travellers > 1 ? 's' : ''}.</p><div class="glass" style="padding:16px;align-self:stretch;text-align:left"><div class="m">✓ Finding best stays</div><div class="m" style="margin:8px 0">✓ Building daily routes</div><div class="m">✓ Balancing budget</div></div></div>`),
+  itinerary: () => {
+    const t = S.p.t, ed = S.p.edit; return page('Itinerary', `<h1 style="font-size:26px;margin-bottom:4px">${esc(t.name)}</h1><p style="margin-bottom:16px">${fmtD(t.start)} - ${fmtD(t.end)} · ${ed ? 'Editing' : 'Day-by-day plan'}</p>${t.itinerary.map((day, di) => `<div class="glass dayc"><div class="row sp"><span class="tag">Day ${di + 1} · ${fmtD(addD(t.start, di))} · ${esc(day.theme)}</span>${ed ? `<span class="ic sm" onclick="delDay(${di})">🗑</span>` : ''}</div>${day.items.map((it, ii) => `<div class="act">${ed ? `<div class="row" style="gap:8px"><input class="in tiny" value="${esc(it.time)}" maxlength="10" onchange="upd(${di},${ii},'time',this.value)"><input class="in tiny" style="flex:1;width:auto" value="${esc(it.title)}" maxlength="120" onchange="upd(${di},${ii},'title',this.value)"></div><div class="row" style="gap:8px;margin-top:8px"><span class="ic sm" onclick="mvAct(${di},${ii},-1)">↑</span><span class="ic sm" onclick="mvAct(${di},${ii},1)">↓</span><span class="ic sm" onclick="delAct(${di},${ii})">✕</span></div>` : `<div class="row" style="gap:12px;align-items:flex-start"><b class="tm">${esc(it.time)}</b><div><h3>${esc(it.title)}</h3><p>${esc(it.note || '')}</p></div></div>`}</div>`).join('') || '<p class="m" style="padding-top:10px">No activities yet.</p>'}${ed ? `<span class="pill" style="margin-top:10px" onclick="addAct(${di})">＋ Add activity</span>` : ''}</div>`).join('')}${ed ? '<span class="pill" onclick="addDay()">＋ Add day</span>' : '<span class="pill" onclick="regen()">✦ Regenerate with AI</span>'}`, { right: `<div class="ic" onclick="toggleEdit()">${ed ? '✓' : '✎'}</div>`, footer: ed ? btn('Done', 'toggleEdit()', '✓') : btn('Trip Overview', `go('overview',{id:${t.id}})`) });
+  },
+  trips: () => {
+    const tab = S.p.tab || 'Upcoming', l = S.trips.filter((t) => (tab === 'Past') === (tripStatus(t) === 'Past')).sort((a, b) => a.start.localeCompare(b.start));
+    return page('', `<div class="row sp" style="margin:14px 0"><h1 style="font-size:30px">My <span>Trips</span></h1><div class="ic" onclick="newTrip()">＋</div></div>${chips(['Upcoming', 'Past'], tab, 'setTab')}<div class="col" style="margin-top:12px">${l.map((t) => `<div>${tripCard(t)}<div class="row" style="margin:10px 0 6px;gap:8px"><span class="pill" onclick="editTrip(${t.id})">✎ Edit</span><span class="pill" onclick="delTrip(${t.id})">🗑 Delete</span></div></div>`).join('') || empty('✈', tab === 'Past' ? 'No past trips' : 'No trips yet', 'Plan your first adventure with the AI planner.', '<span class="pill on" onclick="newTrip()">＋ Create a trip</span>')}</div>`, { nohdr: 1, tabs: 1 });
+  },
+  overview: () => {
+    const t = S.p.t, d = S.p.d, h = t.hotelId && d.hotels.find((x) => x.id === t.hotelId), pts = t.itinerary.slice(0, 6).map((_, i, a) => [30 + (i * 240) / Math.max(1, a.length - 1), 150 - Math.sin(i * 1.3) * 40 - i * 8]);
+    const row = (a, b, fn) => `<div class="glass li row sp" style="${fn ? 'cursor:pointer' : ''}" ${fn ? `onclick="${fn}"` : ''}><span>${a}</span><b>${b}</b></div>`;
+    return page('Trip Overview', `<h1 style="font-size:28px">${esc(t.name)}<br><span>${fmtD(t.start)} - ${fmtD(t.end)}</span></h1><div class="map" style="margin:14px 0"><svg viewBox="0 0 300 200"><path d="${pts.map((p, i) => (i ? 'L' : 'M') + p.join(' ')).join(' ')}" fill="none" stroke="#d58bff" stroke-width="3" stroke-dasharray="6 6"/>${pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="8" fill="${i === 0 ? '#ec4899' : '#fff'}"/>`).join('')}</svg></div><div class="col">${row('Destination', esc(d.name))}${row('Duration', nights(t) + ' days')}${row('Travellers', t.travellers)}${row('Budget', money(t.budget))}${row('Hotel', h ? esc(h.name) + ' ›' : 'Choose a hotel ›', `go('details',{id:${d.id},tripId:${t.id}})`)}${row('Itinerary', 'View ›', `go('itinerary',{id:${t.id}})`)}${row('Budget Tracker', money(spent(t)) + ' spent ›', `go('tracker',{id:${t.id}})`)}</div><div class="row" style="margin-top:16px;gap:8px"><span class="pill" onclick="editTrip(${t.id})">✎ Edit trip</span><span class="pill" onclick="delTrip(${t.id})">🗑 Delete</span></div>`);
+  },
+  tracker: () => {
+    const t = S.p.t, sp = spent(t), pc = Math.round((sp / t.budget) * 100), cats = ['Flights', 'Hotel', 'Food', 'Activities', 'Transport', 'Other'];
+    return page('Budget Tracker', `<div class="glass" style="padding:22px;margin-bottom:14px"><p>Spent</p><h1 style="margin:6px 0">${money(sp)} <span style="font-size:18px">/ ${money(t.budget)}</span></h1><div class="bar"><i style="width:${Math.min(100, pc)}%"></i></div><p style="margin-top:6px">${pc}% used${sp > t.budget ? ' · over budget!' : ` · ${money(t.budget - sp)} left`}</p></div><div class="glass" style="padding:16px;margin-bottom:14px"><h3 style="margin-bottom:12px">Add expense</h3>${fld('xt', 'What was it for?', { attr: 'maxlength="60"' })}${fld('xa', 'Amount (' + cur()[0] + ')', { type: 'number', attr: 'min="0" step="0.01" inputmode="decimal"' })}<div class="fld"><select class="in" id="xc">${cats.map((c) => `<option>${c}</option>`).join('')}</select></div><div class="err form" id="e_xf"></div>${btn('Add expense', 'addExp()', '＋')}</div><div class="sec"><h2>Expenses</h2></div>${t.expenses.length ? t.expenses.slice().reverse().map((e) => `<div class="glass li row sp" style="margin-bottom:10px"><div><h3>${esc(e.title)}</h3><p>${e.category} · ${fmtD(e.date)}</p></div><span class="row"><b>${money(e.amount)}</b><span class="ic sm" onclick="delExp('${e.id}')">✕</span></span></div>`).join('') : empty('💸', 'No expenses yet', 'Add your first expense above.')}`);
+  },
+  profile: () => { const u = S.user, un = S.notifs.filter((n) => !n.read).length, countries = new Set(S.trips.map((t) => D(t.destId)?.country)).size; return page('', `<div class="row" style="gap:14px;margin:18px 0"><div class="av" style="width:72px;height:72px;font-size:26px;cursor:default">${esc(u.name[0].toUpperCase())}</div><div><h2>${esc(u.name)}</h2><p>${esc(u.email)}</p>${u.city ? `<p>${esc(u.city)}</p>` : ''}</div></div><div class="row" style="gap:10px;margin-bottom:14px"><div class="glass stat"><h2>${S.trips.length}</h2><p>Trips</p></div><div class="glass stat"><h2>${S.favs.length}</h2><p>Saved</p></div><div class="glass stat"><h2>${countries}</h2><p>Countries</p></div></div>${u.bio ? `<div class="glass li" style="margin-bottom:12px"><p style="color:#fff">${esc(u.bio)}</p></div>` : ''}<div class="col">${[['Edit Profile', "go('editProfile')", ''], ['Notifications', "go('notifications')", un ? `<i class="badge" style="position:static">${un}</i>` : ''], ['Settings', "go('settings')", ''], ['Help & Support', "go('help')", '']].map((r) => `<div class="glass li row sp" style="cursor:pointer" onclick="${r[1]}"><span>${r[0]}</span><span class="row">${r[2]}›</span></div>`).join('')}</div><div style="text-align:center;margin-top:16px"><span class="pill" style="color:#ff8fb5" onclick="logout()">Log out</span></div>`, { nohdr: 1, tabs: 1 }); },
+  editProfile: () => { const u = S.user; return page('Edit Profile', `<div class="av" style="width:84px;height:84px;font-size:30px;margin:6px auto 20px;cursor:default">${esc(u.name[0].toUpperCase())}</div>${fld('nm', 'Full name', { v: u.name, attr: 'maxlength="60"' })}${fld('em', 'Email', { v: u.email, ro: 1 })}${fld('ph', 'Phone (optional)', { v: u.phone, type: 'tel', attr: 'maxlength="20"' })}${fld('ct', 'Home city (optional)', { v: u.city, attr: 'maxlength="60"' })}<div class="fld"><textarea class="in" id="bi" maxlength="200" placeholder="Short bio (optional)">${esc(u.bio)}</textarea></div><div class="err form" id="e_f"></div>`, { footer: btn('Save profile', 'saveProfile()', '✓') }); },
+  notifications: () => page('Notifications', S.notifs.length ? `<div class="col">${S.notifs.map((n) => `<div class="glass li row nt ${n.read ? '' : 'unread'}" style="gap:12px;cursor:pointer" onclick="markRead(${n.id})"><div style="flex:1"><h3>${esc(n.title)}</h3><p>${esc(n.body)}</p><p style="font-size:11px;margin-top:4px">${new Date(n.createdAt).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</p></div><span class="ic sm" onclick="event.stopPropagation();delNotif(${n.id})">✕</span></div>`).join('')}</div>` : empty('🔔', 'All caught up', 'New trip reminders and updates will appear here.'), { right: `<div class="ic" onclick="markAll()" title="Mark all read">✓</div>` }),
+  settings: () => {
+    const s = S.user.settings, sw = (k, label, sub) => `<div class="glass li row sp" style="margin-bottom:10px"><div><h3>${label}</h3><p>${sub}</p></div><div class="sw ${s[k] ? 'on' : ''}" onclick="setSet('${k}',${!s[k]})"></div></div>`, pl = (k, arr) => `<div class="row" style="flex-wrap:wrap">${arr.map((x) => `<span class="pill ${s[k] === x ? 'on' : ''}" onclick="setSet('${k}','${x}')">${x}</span>`).join('')}</div>`;
+    return page('Settings', `<div class="sec"><h2>Notifications</h2></div>${sw('push', 'Push notifications', 'Trip updates and alerts')}${sw('reminders', 'Trip reminders', 'Get reminded before a trip starts')}${sw('deals', 'Deals by email', 'Occasional travel offers')}<div class="sec"><h2>Currency</h2></div>${pl('currency', ['USD', 'EUR', 'INR'])}<div class="sec"><h2>Distance units</h2></div>${pl('units', ['km', 'mi'])}<div class="sec"><h2>Account</h2></div><div class="col"><div class="glass li row sp" style="cursor:pointer" onclick="go('editProfile')"><span>Edit profile</span><span>›</span></div><div class="glass li row sp" style="cursor:pointer" onclick="pwSheet()"><span>Change password</span><span>›</span></div><div class="glass li row sp" style="cursor:pointer" onclick="clearSaved()"><span>Clear saved destinations</span><span>›</span></div><div class="glass li row sp" style="cursor:pointer;color:#ff8fb5" onclick="delAccount()"><span>Delete account</span><span>›</span></div></div><p style="text-align:center;margin-top:20px;font-size:12px">Explorify v1.0</p>`);
+  },
+  help: () => page('Help & Support', `<div class="sec"><h2>FAQ</h2></div>${FAQ.map((f) => `<div class="glass faq" onclick="toggleFaq(this)"><div class="row sp"><h3>${f[0]}</h3><span class="ar">›</span></div><p>${f[1]}</p></div>`).join('')}<div class="sec"><h2>Contact support</h2></div>${fld('sj', 'Subject', { attr: 'maxlength="80"' })}<div class="fld"><textarea class="in" id="sm" maxlength="1000" placeholder="How can we help?"></textarea><div class="err" id="e_sm"></div></div><div class="err form" id="e_f"></div>${btn('Send message', 'sendTicket()', '✉')}${creditsHtml()}${S.p.tickets?.length ? `<div class="sec"><h2>Your requests</h2></div>${S.p.tickets.slice(0, 5).map((t) => `<div class="glass li row sp" style="margin-bottom:10px"><div><h3>${esc(t.subject)}</h3><p>${fmtD(t.createdAt.slice(0, 10))}</p></div><span class="tag">${t.status}</span></div>`).join('')}` : ''}`),
+};
+
+/* ---------- boot ---------- */
+(async () => {
+  fit(); addEventListener('resize', fit);
+  try { S.dests = await api('/destinations'); } catch {}
+  loadPhotos();
+  // Start at the animated logo every time so the full requested intro sequence is visible.
+  localStorage.removeItem(TK); S.user = null;
+  render(1);
+})();
+
+/* ---------- mobile-style scroll effects (work on every scrollable area) ---------- */
+function bindScroll(rt) {
+  const scr = rt.parentNode, tab = scr.querySelector('.tab'), h1 = rt.querySelector('h1'), rows = [...rt.querySelectorAll('.row')].filter((r) => r.style.overflowX === 'auto');
+  if (h1) h1.classList.add('lt');
+  let last = 0, tick = false;
+  const fx = () => {
+    tick = false; const st = rt.scrollTop, rr = rt.getBoundingClientRect(), cy0 = rr.top + rr.height / 2;
+    scr.classList.toggle('scrolled', st > 8);
+    if (h1) h1.style.setProperty('--p', Math.min(1, st / 140).toFixed(3));
+    if (tab && Math.abs(st - last) > 6) { tab.style.setProperty('--ty', st > last && st > 80 ? '130px' : '0px'); last = st; }
+    rt.querySelectorAll('.rv').forEach((el) => {
+      const r = el.getBoundingClientRect(); if (r.bottom < rr.top - 120 || r.top > rr.bottom + 120) return;
+      const row = el.parentNode.style && el.parentNode.style.overflowX === 'auto' ? el.parentNode.getBoundingClientRect() : null;
+      const d = row ? Math.min(1, Math.abs(r.left - row.left) / row.width) : Math.min(1, Math.abs(r.top + r.height / 2 - cy0) / (rr.height * 0.62));
+      el.style.scale = (1 - d * d * 0.07).toFixed(3);
+      if (el.classList.contains('card')) el.style.setProperty('--py', (((r.top + r.height / 2 - cy0) / rr.height) * -70).toFixed(1) + 'px');
+    });
+  };
+  const sched = () => { if (!tick) { tick = true; requestAnimationFrame(fx); } };
+  rt.addEventListener('scroll', sched, { passive: true }); rows.forEach((r) => r.addEventListener('scroll', sched, { passive: true }));
+  fx(); elastic(rt); drag(rt);
+}
+function elastic(el) { // rubber-band bounce at top/bottom edges (wheel + touch)
+  let y = 0, t, sy = 0, on = false;
+  const set = (v) => { y = v; el.style.setProperty('--ov', v.toFixed(1) + 'px'); };
+  const rel = () => { el.classList.add('rel'); set(0); setTimeout(() => el.classList.remove('rel'), 600); };
+  const edge = (dir) => (dir > 0 && el.scrollTop <= 0) || (dir < 0 && el.scrollTop + el.clientHeight >= el.scrollHeight - 1);
+  el.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) return; if (!edge(-e.deltaY)) { if (y) rel(); return; }
+    e.preventDefault(); el.classList.remove('rel'); set(Math.max(-80, Math.min(80, y - e.deltaY * 0.3))); clearTimeout(t); t = setTimeout(rel, 110);
+  }, { passive: false });
+  el.addEventListener('touchstart', (e) => { sy = e.touches[0].clientY; on = true; }, { passive: true });
+  el.addEventListener('touchmove', (e) => { if (!on) return; const dy = e.touches[0].clientY - sy; if (edge(dy)) { e.preventDefault(); el.classList.remove('rel'); set(Math.max(-90, Math.min(90, dy * 0.45))); } }, { passive: false });
+  el.addEventListener('touchend', () => { on = false; if (y) rel(); });
+}
+function drag(el) { // click-and-drag scrolling with momentum for mouse users (vertical, or horizontal inside carousels)
+  let down = false, sx = 0, sy = 0, sl = 0, st = 0, moved = 0, lx = 0, ly = 0, lt = 0, v = 0, cap = false, raf = 0, row = null, axis = null, tgt = el;
+  el.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('input,textarea,select')) return;
+    cancelAnimationFrame(raf); down = true; cap = false; moved = 0; axis = null; sx = lx = e.clientX; sy = ly = e.clientY; st = el.scrollTop; lt = performance.now(); v = 0;
+    row = e.target.closest('.row'); if (row && (row.style.overflowX !== 'auto' || !el.contains(row))) row = null; sl = row ? row.scrollLeft : 0;
+  });
+  el.addEventListener('pointermove', (e) => {
+    if (!down) return; const dx = e.clientX - sx, dy = e.clientY - sy; moved = Math.max(moved, Math.hypot(dx, dy)); if (moved < 6) return;
+    if (!axis) { axis = row && Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; tgt = axis === 'x' ? row : el; }
+    if (!cap) { cap = true; el.setPointerCapture(e.pointerId); tgt.classList.add('dragging'); }
+    axis === 'y' ? (el.scrollTop = st - dy) : (row.scrollLeft = sl - dx);
+    const n = performance.now(), dt = Math.max(1, n - lt); v = axis === 'y' ? -(e.clientY - ly) / dt : -(e.clientX - lx) / dt; lx = e.clientX; ly = e.clientY; lt = n;
+  });
+  const up = () => {
+    if (!down) return; down = false; const t = tgt, ax = axis; t.classList.remove('dragging'); if (moved < 6 || !ax) return;
+    let last = performance.now(); const step = () => { const n = performance.now(), dt = n - last; last = n; if (Math.abs(v) < 0.02) return; ax === 'y' ? (t.scrollTop += v * dt) : (t.scrollLeft += v * dt); v *= Math.pow(0.995, dt); raf = requestAnimationFrame(step); }; step();
+  };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+  el.addEventListener('click', (e) => { if (moved >= 6) { e.stopPropagation(); e.preventDefault(); moved = 0; } }, true);
+}
+
+/* ---------- real travel photographs (openly licensed, from Wikimedia Commons; cached in the browser) ---------- */
+const PHQ = { d1: 'Pura Ulun Danu Bratan temple lake', d2: 'Mount Bromo volcano sunrise', d3: 'Santorini Oia caldera sunset', d4: 'Interlaken Lake Brienz Switzerland', d5: 'Kyoto Kinkaku-ji golden pavilion', d6: 'Rome Colosseum', d7: 'Maldives overwater bungalows lagoon', d8: 'Tokyo Shibuya skyline night', d9: 'Moraine Lake Banff Canada', d10: 'Marrakech Jemaa el-Fnaa square', ob0: 'Santorini Greece white blue houses ocean sunset travel photography', ob1: 'Swiss Alps turquoise lake hiker cinematic travel photography', ob2: 'Airplane window above clouds golden hour travel photography', hero: 'Airplane wing above clouds sunrise' };
+let PH = {}; try { PH = JSON.parse(localStorage.getItem('xp_photos') || '{}'); } catch {}
+const savePh = () => { try { localStorage.setItem('xp_photos', JSON.stringify(PH)); } catch {} };
+function applyPh() { document.querySelectorAll('[data-ph]').forEach((el) => { const p = PH[el.dataset.ph]; if (p) el.style.setProperty('--ph', `url("${p.url}")`); }); }
+const BADT = /map|flag|logo|diagram|coat of arms|locator|stamp|poster|painting|drawing|sketch|engraving|postcard|gazette|\.svg/i;
+const plain = (h) => String(h || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 80);
+const tryImg = (src) => new Promise((r) => { const i = new Image(); i.onload = () => r(true); i.onerror = () => r(false); i.src = src; setTimeout(() => r(false), 15000); });
+async function findPhoto(q) {
+  const u = 'https://commons.wikimedia.org/w/api.php?' + new URLSearchParams({ action: 'query', format: 'json', origin: '*', generator: 'search', gsrnamespace: '6', gsrlimit: '20', gsrsearch: q + ' filetype:bitmap', prop: 'imageinfo', iiprop: 'url|size|mime|extmetadata', iiurlwidth: '900', iiextmetadatafilter: 'Artist|LicenseShortName|Categories' });
+  const j = await (await fetch(u)).json(), pages = Object.values(j.query?.pages || {});
+  let best = null, bs = -1e9;
+  for (const p of pages) {
+    const i = p.imageinfo?.[0]; if (!i || i.mime !== 'image/jpeg' || !i.thumburl || i.width < 1600 || i.height < 900 || BADT.test(p.title)) continue;
+    const r = i.width / i.height; if (r < 0.7 || r > 2.4) continue; const m = i.extmetadata || {}, cats = m.Categories?.value || '';
+    const score = (/Featured pictures|Quality images|Valued images/i.test(cats) ? 2 : 0) + (m.LicenseShortName ? 1 : 0) - p.index / 100;
+    if (score > bs) { bs = score; best = { url: i.thumburl, credit: plain(m.Artist?.value) || 'Wikimedia Commons', license: plain(m.LicenseShortName?.value) || 'CC', page: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent(p.title.replace(/ /g, '_')) }; }
+  }
+  return best;
+}
+const PHOTO_FALLBACKS = {
+  d1:'photo-1537996194471-e657df975ab4', d2:'photo-1519681393784-d120267933ba',
+  d3:'photo-1613395877344-13d4a8e0d49e', d4:'photo-1531366936337-7c912a4589a7',
+  d5:'photo-1493976040374-85c8e12f0c0e', d6:'photo-1552832230-c0197dd311b5',
+  d7:'photo-1514282401047-d79a71a590e8', d8:'photo-1540959733332-eab4de3a5f9a',
+  d9:'photo-1503614472-8c93d56cd3b0', d10:'photo-1489749798305-4e6e4f7e8f3b',
+  ob0:'photo-1613395877344-13d4a8e0d49e', ob1:'photo-1501785888041-af3ef285b470',
+  ob2:'photo-1436491865332-7a61a109cc05', hero:'photo-1436491865332-7a61a109cc05'
+};
+const unsplashPhoto = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=85`;
+async function loadPhotos() {
+  const keys = Object.keys(PHQ).filter((k) => !PH[k]);
+  const work = async () => {
+    while (keys.length) {
+      const k = keys.shift();
+      try {
+        if (await tryImg(`images/${k}.jpg`)) PH[k] = { url: `images/${k}.jpg`, credit: 'Your photo', license: '', page: '' };
+        if (!PH[k]) { const b = await findPhoto(PHQ[k]); if (b && await tryImg(b.url)) PH[k] = b; }
+        if (!PH[k] && PHOTO_FALLBACKS[k]) { const url = unsplashPhoto(PHOTO_FALLBACKS[k]); if (await tryImg(url)) PH[k] = { url, credit: 'Unsplash photographer', license: 'Unsplash License', page: 'https://unsplash.com/license' }; }
+      } catch (err) { console.warn('Photo unavailable for', k, err); }
+      if (PH[k]) { savePh(); applyPh(); }
+    }
+  };
+  await Promise.all([work(), work(), work()]);
+}
+const credit = (k) => { const p = PH[k]; return p && p.credit !== 'Your photo' ? `Photo: ${esc(p.credit)} · ${esc(p.license)} · Wikimedia Commons` : ''; };
+function creditsHtml() {
+  const es = Object.entries(PH).filter(([, v]) => v.credit !== 'Your photo' && String(v.page).startsWith('https://commons.wikimedia.org/')); if (!es.length) return '';
+  const lbl = (k) => (k[0] === 'd' ? D(+k.slice(1))?.name || k : k === 'hero' ? 'Welcome screen' : 'Onboarding ' + (+k.slice(2) + 1));
+  return `<div class="sec"><h2>Photo credits</h2></div><div class="glass li">${es.map(([k, v]) => `<p style="margin-bottom:6px">${esc(lbl(k))}: ${esc(v.credit)} · ${esc(v.license)} · <a href="${esc(v.page)}" target="_blank" rel="noopener" style="color:var(--gold)">source</a></p>`).join('')}</div>`;
+}
+
+/* ---------- fluid "slide to continue" button animation ---------- */
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.btn'); if (!b || b._busy) return;
+  const dot = b.querySelector('b'), fn = b.onclick; if (!dot || !fn) return;
+  e.stopImmediatePropagation(); e.preventDefault(); b._busy = true;
+  const d = b.clientWidth - dot.offsetWidth - 12, t0 = performance.now(), trail = document.createElement('i'); trail.className = 'trail'; b.prepend(trail); b.classList.add('sliding');
+  const ease = 'cubic-bezier(.65,0,.25,1)', go1 = dot.animate([{ transform: 'translateX(0) scale(1)' }, { transform: `translateX(${d * 0.6}px) scale(1.14)`, offset: 0.6 }, { transform: `translateX(${d}px) scale(1)` }], { duration: 520, easing: ease, fill: 'forwards' });
+  trail.animate([{ width: '46px', opacity: 0.9 }, { width: b.clientWidth - 12 + 'px', opacity: 0.35 }], { duration: 520, easing: ease, fill: 'forwards' });
+  go1.onfinish = () => {
+    try { fn.call(b, e); } catch (err) { console.error(err); }
+    const iv = setInterval(() => {
+      if (performance.now() - t0 < 900 || (S.busy && performance.now() - t0 < 8000)) return; clearInterval(iv);
+      if (!document.contains(b)) return; // screen changed: button is gone
+      const back = dot.animate([{ transform: `translateX(${d}px)` }, { transform: 'translateX(0)' }], { duration: 420, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+      trail.animate([{ opacity: 0.35 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
+      back.onfinish = () => { go1.cancel(); trail.remove(); b.classList.remove('sliding'); b._busy = false; };
+    }, 120);
+  };
+}, true);
+
+/* ---------- subtle 3D tilt on cards (mouse) ---------- */
+document.addEventListener('pointermove', (e) => {
+  if (e.pointerType !== 'mouse') return; const c = e.target.closest && e.target.closest('.card'); if (!c || c.classList.contains('dragging')) return;
+  const r = c.getBoundingClientRect(); c.style.setProperty('--ry', (((e.clientX - r.left) / r.width - 0.5) * 7).toFixed(2) + 'deg'); c.style.setProperty('--rx', ((-((e.clientY - r.top) / r.height - 0.5)) * 7).toFixed(2) + 'deg');
+});
+document.addEventListener('pointerout', (e) => { const c = e.target.closest && e.target.closest('.card'); if (c) { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); } });
+</script></body></html>
+
+
